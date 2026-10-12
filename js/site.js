@@ -16,20 +16,25 @@ for (const cartao of document.querySelectorAll('.cartao, .motivos li')) {
   });
 }
 
-// Botão "Copiar e-mail": útil quando o computador não tem programa de e-mail configurado
-const copiar = document.querySelector('[data-copiar]');
-const aviso = document.querySelector('.copiar__aviso');
-if (copiar && navigator.clipboard) {
-  copiar.hidden = false;
-  copiar.addEventListener('click', async () => {
+// Botões de e-mail: além de abrir o programa de e-mail, copiam o endereço
+// (muita gente não tem programa de e-mail configurado no computador)
+const aviso = document.querySelector('.aviso');
+let tempoAviso;
+const mostrarAviso = (texto) => {
+  aviso.textContent = texto;
+  aviso.classList.add('aviso--visivel');
+  clearTimeout(tempoAviso);
+  tempoAviso = setTimeout(() => aviso.classList.remove('aviso--visivel'), 4500);
+};
+for (const botao of document.querySelectorAll('[data-copiar]')) {
+  botao.addEventListener('click', async () => {
+    const email = botao.dataset.copiar;
     try {
-      await navigator.clipboard.writeText(copiar.dataset.copiar);
-      aviso.textContent = 'E-mail copiado! É só colar no seu e-mail.';
+      await navigator.clipboard.writeText(email);
+      mostrarAviso(`E-mail copiado: ${email}`);
     } catch {
-      aviso.textContent = `Não deu para copiar. O e-mail é ${copiar.dataset.copiar}`;
+      mostrarAviso(`Nosso e-mail: ${email}`);
     }
-    clearTimeout(copiar.timer);
-    copiar.timer = setTimeout(() => { aviso.textContent = ''; }, 5000);
   });
 }
 

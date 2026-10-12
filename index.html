@@ -37,8 +37,8 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/site.css?v=2">
-  <script src="js/site.js?v=2" defer></script>
+  <link rel="stylesheet" href="css/site.css?v=3">
+  <script src="js/site.js?v=3" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -71,7 +71,7 @@
             acompanhamento de perto, do primeiro esboço ao uso no dia a dia.
           </p>
           <div class="botoes">
-            <a class="botao botao--principal" href="mailto:hbonesolucoes@gmail.com?subject=Contato%20pelo%20site%20HbOne">
+            <a class="botao botao--principal" href="mailto:hbonesolucoes@gmail.com?subject=Contato%20pelo%20site%20HbOne" data-copiar="hbonesolucoes@gmail.com">
               Fale com a HbOne
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -204,17 +204,11 @@
         <h2>Vamos tirar a sua ideia do papel?</h2>
         <p>Conte o que você precisa. Respondemos por e-mail com os próximos passos.</p>
         <div class="botoes botoes--centro">
-          <a class="botao botao--principal" href="mailto:hbonesolucoes@gmail.com?subject=Contato%20pelo%20site%20HbOne">
+          <a class="botao botao--principal" href="mailto:hbonesolucoes@gmail.com?subject=Contato%20pelo%20site%20HbOne" data-copiar="hbonesolucoes@gmail.com">
             hbonesolucoes@gmail.com
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <!-- Para quem não tem programa de e-mail configurado no computador -->
-          <button class="botao botao--vidro copiar" type="button" data-copiar="hbonesolucoes@gmail.com" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h10v12H9z M5 15V3h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Copiar e-mail</span>
-          </button>
         </div>
-        <p class="copiar__aviso" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
@@ -225,5 +219,6 @@
       <span>© 2026 HbOne Soluções</span>
     </div>
   </footer>
+  <p class="aviso" role="status" aria-live="polite"></p>
 </body>
 </html>

@@ -388,7 +388,18 @@ main:focus { outline: none; }
 .contato p { margin: 16px auto 34px; max-width: 46ch; color: #a9bbcb; }
 .contato .botao { overflow-wrap: anywhere; }
 .botoes--centro { justify-content: center; margin-top: 0; }
-.contato .copiar__aviso { margin: 14px 0 0; min-height: 1.6em; font-size: 0.95rem; color: var(--ciano); }
+
+/* Balão "E-mail copiado" (aparece embaixo, visível de qualquer parte da página) */
+.aviso {
+  position: fixed; left: 50%; bottom: 24px; z-index: 40; margin: 0;
+  max-width: calc(100% - 32px); padding: 12px 20px; border-radius: 999px;
+  background: #0e1e2e; color: #fff; font-weight: 600; font-size: 0.95rem; text-align: center;
+  border: 1px solid rgb(47 211 220 / .45); box-shadow: 0 16px 40px -12px rgb(0 0 0 / .6);
+  opacity: 0; transform: translate(-50%, 16px); pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.aviso::before { content: "✓  "; color: var(--ciano); font-weight: 800; }
+.aviso--visivel { opacity: 1; transform: translate(-50%, 0); }
 
 /* Animações contínuas param quando a parte da página não está na tela (economiza bateria) */
 .pausado, .pausado *, .pausado::before, .pausado::after, .pausado *::before, .pausado *::after { animation-play-state: paused !important; }

@@ -10,7 +10,7 @@ Dê dois cliques em `index.html`. Para conferir a versão de celular, aperte F12
 index.html            página inicial
 404.html              página de "não encontrada"
 css/site.css          cores e layout (as cores ficam no início do arquivo)
-js/site.js            animações, luz que segue o mouse e o botão "Copiar e-mail"
+js/site.js            animações, luz que segue o mouse e copiar o e-mail ao clicar nos botões
 favicon.svg           ícone da aba ("Hb")
 apple-touch-icon.png  ícone quando alguém salva o site na tela inicial do celular
 og.jpg                imagem da prévia do link (WhatsApp, LinkedIn...), 1200×630
@@ -18,9 +18,9 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ```
 
 ## Onde mudar o texto
-- **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Ele aparece no botão do topo, no contato, no botão "Copiar e-mail" e nos dados para o Google.
+- **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Ele aparece nos dois botões (topo e contato, cada um em 3 lugares: link, data-copiar e texto) e nos dados para o Google.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
-- **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=2` e `site.js?v=2` no `index.html` (e no `404.html`, no caso do CSS). Assim quem já visitou o site vê a versão nova.
+- **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=3` e `site.js?v=3` no `index.html` (e no `404.html`, no caso do CSS). Assim quem já visitou o site vê a versão nova.
 
 ## Publicar no servidor HB (Oracle)
 1. Envie esta pasta para o repositório `hbone-site` no GitHub (conta hudsonbatistaia).
