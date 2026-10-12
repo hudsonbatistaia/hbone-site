@@ -9,7 +9,8 @@ Dê dois cliques em `index.html`. Para conferir a versão de celular, aperte F12
 ```
 index.html            página inicial
 404.html              página de "não encontrada"
-css/site.css          cores e layout (as cores ficam no início do arquivo)
+css/site.css          cores e layout (ORIGINAL; vai embutido no index.html pelo montar.mjs)
+montar.mjs            copia o css/site.css para dentro do index.html
 js/site.js            animações, luz que segue o mouse e copiar o e-mail ao clicar nos botões
 favicon.svg           ícone da aba ("Hb")
 apple-touch-icon.png  ícone quando alguém salva o site na tela inicial do celular
@@ -20,7 +21,8 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ## Onde mudar o texto
 - **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato e nos dados para o Google.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
-- **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=…` ou `site.js?v=…` no `index.html` (e no `404.html`, no caso do CSS). **Isso é obrigatório:** o navegador guarda esses arquivos por 1 ano, e só busca o novo quando o número muda.
+- **Depois de mudar o CSS:** edite só o `css/site.css` e rode `node montar.mjs`, que copia o CSS para dentro do `index.html` (assim a página abre mais rápido no celular). Aumente também o `?v=` do CSS no `404.html`.
+- **Depois de mudar o JS:** aumente o número em `site.js?v=…` no `index.html`. **É obrigatório:** o navegador guarda o arquivo por 1 ano e só busca o novo quando o número muda.
 
 ## Publicar no servidor HB (Oracle)
 1. Envie esta pasta para o repositório `hbone-site` no GitHub (conta hudsonbatistaia).
