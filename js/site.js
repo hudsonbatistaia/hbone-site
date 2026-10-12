@@ -2,10 +2,18 @@
 // Sem JavaScript a página funciona igual, só sem as animações.
 document.documentElement.classList.add('js');
 
+// Topo escurece depois de rolar 20px. Usa um marcador invisível em vez de ler
+// a posição da rolagem, para não forçar o navegador a recalcular a página.
 const topo = document.querySelector('.topo');
-const marcarTopo = () => topo.classList.toggle('rolou', window.scrollY > 20);
-marcarTopo();
-window.addEventListener('scroll', marcarTopo, { passive: true });
+const marcador = document.createElement('div');
+marcador.style.cssText = 'position:absolute;top:20px;left:0;width:1px;height:1px;pointer-events:none';
+marcador.setAttribute('aria-hidden', 'true');
+document.body.prepend(marcador);
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(([e]) => topo.classList.toggle('rolou', !e.isIntersecting)).observe(marcador);
+} else {
+  topo.classList.add('rolou');
+}
 
 // Serviços e diferenciais: a luz do cartão segue o mouse
 for (const cartao of document.querySelectorAll('.cartao, .motivos li')) {

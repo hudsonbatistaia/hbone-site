@@ -20,7 +20,7 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ## Onde mudar o texto
 - **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato e nos dados para o Google.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
-- **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=3` e `site.js?v=3` no `index.html` (e no `404.html`, no caso do CSS). Assim quem já visitou o site vê a versão nova.
+- **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=…` ou `site.js?v=…` no `index.html` (e no `404.html`, no caso do CSS). **Isso é obrigatório:** o navegador guarda esses arquivos por 1 ano, e só busca o novo quando o número muda.
 
 ## Publicar no servidor HB (Oracle)
 1. Envie esta pasta para o repositório `hbone-site` no GitHub (conta hudsonbatistaia).
@@ -47,8 +47,11 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
            Permissions-Policy "camera=(), microphone=(), geolocation=()"
            -Server
        }
-       @estaticos path /css/* /js/* *.png *.jpg *.svg
-       header @estaticos Cache-Control "public, max-age=604800"
+       # CSS e JS têm ?v= no endereço: podem ficar 1 ano no cache. Imagens: 30 dias.
+       @versionados path /css/* /js/*
+       header @versionados Cache-Control "public, max-age=31536000, immutable"
+       @imagens path *.png *.jpg *.svg
+       header @imagens Cache-Control "public, max-age=2592000"
 
        file_server {
            hide .git LEIA-ME.md
