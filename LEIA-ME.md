@@ -18,7 +18,7 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ```
 
 ## Onde mudar o texto
-- **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Ele aparece nos dois botões (topo e contato, cada um em 3 lugares: link, data-copiar e texto) e nos dados para o Google.
+- **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato e nos dados para o Google.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
 - **Depois de mudar o CSS ou o JS:** aumente o número em `site.css?v=3` e `site.js?v=3` no `index.html` (e no `404.html`, no caso do CSS). Assim quem já visitou o site vê a versão nova.
 
