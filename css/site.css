@@ -73,13 +73,27 @@ main:focus { outline: none; }
 
 /* ---------- Marca: HbOne + SOLUÇÕES ---------- */
 .marca { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1; text-decoration: none; }
-.marca__nome { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
-.marca__nome span { background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.marca__nome { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; transition: text-shadow .3s; }
+.marca__nome span {
+  /* degradê com o dobro da largura: no passar do mouse ele "corre" pelas letras */
+  background: linear-gradient(100deg, var(--ciano), var(--azul) 25%, var(--violeta) 50%, var(--azul) 75%, var(--ciano));
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transition: filter .3s;
+}
 .marca__sub {
   margin-top: 4px; padding-left: 2px;
   font-size: 0.6rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase;
   color: #8fb3c7;
+  transition: letter-spacing .4s cubic-bezier(.2,.8,.2,1), color .3s, text-shadow .3s;
 }
+/* Logo ao passar o mouse (ou ao focar pelo teclado) */
+.marca:hover .marca__nome, .marca:focus-visible .marca__nome { text-shadow: 0 0 18px rgb(255 255 255 / .35); }
+.marca:hover .marca__nome span, .marca:focus-visible .marca__nome span {
+  animation: fluir 1.6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 8px rgb(79 124 255 / .75));
+}
+.marca:hover .marca__sub, .marca:focus-visible .marca__sub { letter-spacing: 0.52em; color: #d9fbfd; text-shadow: 0 0 10px rgb(47 211 220 / .7); }
 .marca--pequena .marca__nome { font-size: 1.2rem; color: var(--marca); }
 .marca--pequena .marca__sub { font-size: 0.5rem; color: var(--texto-suave); }
 
@@ -478,6 +492,7 @@ main:focus { outline: none; }
 @keyframes boiar { 50% { transform: translateY(-10px); } }
 @keyframes crescer { from { transform: scaleY(0); } }
 @keyframes girar { to { --angulo: 360deg; } }
+@keyframes fluir { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 @keyframes pular {
   30% { transform: translateY(-5px); }
   55% { transform: translateY(0); }
