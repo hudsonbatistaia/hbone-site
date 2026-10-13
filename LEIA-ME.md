@@ -19,7 +19,7 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ```
 
 ## Onde mudar o texto
-- **E-mail de contato:** procure `hbonesolucoes@gmail.com` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato, no rodapé e nos dados para o Google.
+- **E-mail de contato:** procure `contato@hbone.com.br` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato, no rodapé e nos dados para o Google.
 - **WhatsApp e Instagram:** ficam no rodapé (ícones e coluna Contato) e nos dados para o Google. Procure `5592992005797` e `instagram.com/hbonesolucoes`.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
 - **Depois de mudar o CSS:** edite só o `css/site.css` e rode `node montar.mjs`, que copia o CSS para dentro do `index.html` (assim a página abre mais rápido no celular). Aumente também o `?v=` do CSS no `404.html`.
@@ -71,7 +71,7 @@ robots.txt, sitemap.xml   ajudam o Google a encontrar a página
 ## Melhorias para depois (aprovadas em 12/10/2026)
 1. **Depoimentos ou logos de clientes reais** (2 ou 3 frases, com autorização). Nada inventado.
 2. **WhatsApp na seção de contato**, ao lado do e-mail (no rodapé já está, desde 12/10/2026).
-3. **E-mail com o domínio** (ex.: contato@hbone.com.br), por um serviço gratuito de encaminhamento. Não montar servidor de e-mail.
+3. ~~**E-mail com o domínio**~~ Feito em 13/10/2026: contato@hbone.com.br pelo ImprovMX (encaminha para o Gmail hbonesolucoes) e envio pelo Gmail "Enviar e-mail como".
 4. **Revisar duas frases supostas:** "paga um valor fixo e recebe as melhorias sem custo extra" (Produtos próprios) e "hospedagem, segurança e manutenção ficam com a gente" (Por que a HbOne?).
 5. **Google Search Console:** cadastrar o site e enviar o sitemap.xml (guardado para depois). PageSpeed (100 em tudo) e prévia no WhatsApp já conferidos em 12/10/2026.
 
