@@ -24,6 +24,23 @@ for (const cartao of document.querySelectorAll('.cartao, .motivos li')) {
   });
 }
 
+// Menu: acende o link da seção que está no meio da tela
+const linksMenu = [...document.querySelectorAll('.topo nav a:not(.topo__contato)')];
+if ('IntersectionObserver' in window && linksMenu.length) {
+  const visiveis = new Set();
+  const atualizarMenu = () => {
+    for (const link of linksMenu) link.classList.toggle('atual', visiveis.has(link.hash.slice(1)));
+  };
+  const espiao = new IntersectionObserver((entradas) => {
+    for (const e of entradas) e.isIntersecting ? visiveis.add(e.target.id) : visiveis.delete(e.target.id);
+    atualizarMenu();
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  for (const link of linksMenu) {
+    const secao = document.querySelector(link.hash);
+    if (secao) espiao.observe(secao);
+  }
+}
+
 // Botões de e-mail: além de abrir o programa de e-mail, copiam o endereço
 // (muita gente não tem programa de e-mail configurado no computador)
 const aviso = document.querySelector('.aviso');

@@ -96,13 +96,38 @@ main:focus { outline: none; }
 }
 .topo__linha { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
 .topo nav { display: flex; align-items: center; gap: 28px; }
-.topo nav a { color: #b8c7d4; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color .15s; }
-.topo nav a:hover { color: #fff; }
-.topo nav .topo__contato {
-  color: #fff; padding: 8px 18px; border-radius: 999px;
-  background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .16);
+.topo nav a { color: #b8c7d4; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color .2s, text-shadow .2s; }
+
+/* Links do menu: sublinhado em degradê que cresce do centro; fica aceso na seção que está na tela */
+.topo nav a:not(.topo__contato) { position: relative; padding: 6px 0; }
+.topo nav a:not(.topo__contato)::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px;
+  background: var(--degrade); box-shadow: 0 0 10px rgb(47 211 220 / .6);
+  transform: scaleX(0); transition: transform .3s cubic-bezier(.2,.8,.2,1);
 }
-.topo nav .topo__contato:hover { background: rgb(255 255 255 / .16); }
+.topo nav a:hover, .topo nav a.atual { color: #fff; text-shadow: 0 0 14px rgb(47 211 220 / .55); }
+.topo nav a:hover::after, .topo nav a.atual::after { transform: scaleX(1); }
+
+/* Botão Contato: luz girando na borda; ao passar o mouse, preenche com o degradê */
+.topo nav .topo__contato {
+  position: relative; isolation: isolate;
+  color: #fff; padding: 9px 20px; border-radius: 999px;
+  background: rgb(255 255 255 / .06);
+  transition: background-color .25s, box-shadow .25s, transform .25s;
+}
+.topo nav .topo__contato::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+  background: conic-gradient(from var(--angulo), rgb(255 255 255 / .18) 0 60%, var(--ciano) 75%, var(--azul) 85%, var(--violeta) 93%, rgb(255 255 255 / .18) 100%);
+  animation: girar 5s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.topo nav .topo__contato::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: var(--degrade); opacity: 0; transition: opacity .25s;
+}
+.topo nav .topo__contato:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -6px rgb(79 124 255 / .7); text-shadow: none; }
+.topo nav .topo__contato:hover::after { opacity: 1; }
 
 /* ---------- Abertura ---------- */
 .abertura {
@@ -405,8 +430,32 @@ main:focus { outline: none; }
 .pausado, .pausado *, .pausado::before, .pausado::after, .pausado *::before, .pausado *::after { animation-play-state: paused !important; }
 
 /* ---------- Rodapé ---------- */
-.rodape { padding: 30px 0; font-size: 0.9rem; color: var(--texto-suave); border-top: 1px solid var(--borda); }
-.rodape__linha { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+/* Sempre escuro, continuando o contato */
+.rodape { background: #050e17; color: #93a6b7; font-size: 0.95rem; border-top: 1px solid rgb(255 255 255 / .06); }
+.rodape__grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-top: 64px; padding-bottom: 48px; }
+.rodape__marca p { margin-top: 18px; max-width: 38ch; line-height: 1.65; }
+.rodape__titulo {
+  margin: 4px 0 18px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.rodape__coluna a { color: #b8c7d4; text-decoration: none; transition: color .2s; overflow-wrap: anywhere; }
+.rodape__coluna a:hover { color: #fff; }
+
+.redes { display: flex; gap: 12px; margin-top: 24px; }
+.redes a {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+  color: #d7e6f0; background: rgb(255 255 255 / .05); border: 1px solid rgb(255 255 255 / .12);
+  transition: transform .25s, background .25s, box-shadow .25s, color .25s;
+}
+.redes svg { width: 22px; height: 22px; }
+.redes a:hover { transform: translateY(-3px); color: #fff; background: var(--degrade); border-color: transparent; box-shadow: 0 10px 24px -8px rgb(79 124 255 / .8); }
+
+.rodape__base {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding-top: 22px; padding-bottom: 26px; font-size: 0.85rem; color: #6f8496;
+  border-top: 1px solid rgb(255 255 255 / .06);
+}
 
 /* ---------- Aparecer ao rolar (só com JavaScript ligado) ---------- */
 .js .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
@@ -462,6 +511,8 @@ main:focus { outline: none; }
 /* ---------- Telas menores ---------- */
 @media (max-width: 960px) {
   .abertura__linha { grid-template-columns: 1fr; gap: 64px; }
+  .rodape__grade { grid-template-columns: 1fr 1fr; }
+  .rodape__marca { grid-column: 1 / -1; }
   .vitrine { max-width: 520px; margin: 0 auto; width: 100%; }
   .passos { grid-template-columns: repeat(2, 1fr); }
   .passos::before { display: none; }
@@ -487,6 +538,9 @@ main:focus { outline: none; }
   .passos li::before { grid-row: span 2; margin-bottom: 0; }
   .passos li h3 { margin-top: 10px; }
   .cartao { padding: 26px; }
+  .rodape__grade { grid-template-columns: 1fr; gap: 36px; }
+  .rodape .rodape__grade { padding: 48px 16px 40px; }
+  .rodape .rodape__base { padding: 20px 16px 24px; }
   .botoes .botao { flex: 1 1 100%; }
   .tela { transform: none; animation: none; }
   .tela__corpo { grid-template-columns: 48px 1fr; min-height: 240px; }
