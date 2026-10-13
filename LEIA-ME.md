@@ -16,6 +16,7 @@ favicon.svg           ícone da aba ("Hb")
 apple-touch-icon.png  ícone quando alguém salva o site na tela inicial do celular
 og.jpg                imagem da prévia do link (WhatsApp, LinkedIn...), 1200×630
 robots.txt, sitemap.xml   ajudam o Google a encontrar a página
+assinatura/           assinatura de e-mail (https://hbone.com.br/assinatura/): página com botão "Copiar assinatura" e o logo usado nela
 ```
 
 ## Onde mudar o texto

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assinatura de e-mail | HbOne Soluções</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    body { margin: 0; padding: 40px 16px; background: #f2f6f9; color: #142030; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; margin: 0 0 6px; color: #0b1f33; }
+    .sub { margin: 0 0 28px; color: #52606e; }
+    .moldura { background: #fff; border: 1px solid #dfe6ec; border-radius: 14px; padding: 28px 24px; overflow-x: auto; }
+    .acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 20px 0 36px; }
+    button { font: inherit; font-weight: 700; color: #fff; background: #0b1f33; border: 0; border-radius: 999px; padding: 12px 24px; cursor: pointer; }
+    button:hover { background: #1b3654; }
+    button:focus-visible { outline: 3px solid #2fd3dc; outline-offset: 3px; }
+    #aviso { margin: 0; font-weight: 600; color: #0a6770; }
+    h2 { font-size: 1.1rem; color: #0b1f33; margin: 0 0 10px; }
+    ol { margin: 0; padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    code { background: #e6edf3; padding: 1px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Assinatura de e-mail</h1>
+  <p class="sub">Assinatura oficial da HbOne Soluções para o Gmail.</p>
+
+  <div class="moldura">
+    <!-- ASSINATURA: tabela com estilos na própria linha, que é o que os programas de e-mail entendem -->
+    <div id="assinatura">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#142030;">
+        <tr>
+          <td style="vertical-align:middle;padding:0 18px 0 0;">
+            <a href="https://hbone.com.br" style="text-decoration:none;">
+              <img src="https://hbone.com.br/assinatura/logo-hbone.png" width="150" height="72" alt="HbOne Soluções" style="display:block;border:0;width:150px;height:72px;border-radius:10px;">
+            </a>
+          </td>
+          <td style="vertical-align:middle;padding:2px 0 2px 18px;border-left:2px solid #2fd3dc;">
+            <div style="font-size:16px;line-height:20px;font-weight:bold;color:#0b1f33;">Hudson Batista</div>
+            <div style="font-size:13px;line-height:18px;color:#52606e;padding-bottom:8px;">HbOne Soluções · Sistemas sob medida</div>
+            <div style="font-size:13px;line-height:20px;color:#142030;">
+              <a href="mailto:contato@hbone.com.br" style="color:#0a6770;text-decoration:none;">contato@hbone.com.br</a>
+              <span style="color:#a0afbe;">&nbsp;|&nbsp;</span>
+              <a href="https://wa.me/5592992005797" style="color:#0a6770;text-decoration:none;">(92) 99200-5797</a>
+            </div>
+            <div style="font-size:13px;line-height:20px;color:#142030;">
+              <a href="https://hbone.com.br" style="color:#0a6770;text-decoration:none;font-weight:bold;">hbone.com.br</a>
+              <span style="color:#a0afbe;">&nbsp;|&nbsp;</span>
+              <a href="https://www.instagram.com/hbonesolucoes/" style="color:#0a6770;text-decoration:none;">@hbonesolucoes</a>
+              <span style="color:#a0afbe;">&nbsp;|&nbsp;</span>
+              <span style="color:#52606e;">Manaus – AM</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acoes">
+    <button id="copiar" type="button">Copiar assinatura</button>
+    <p id="aviso" role="status" aria-live="polite"></p>
+  </div>
+
+  <h2>Como colocar no Gmail</h2>
+  <ol>
+    <li>Clique em <strong>Copiar assinatura</strong>, acima.</li>
+    <li>No Gmail, clique na engrenagem → <strong>Ver todas as configurações</strong> → aba <strong>Geral</strong>.</li>
+    <li>Desça até <strong>Assinatura</strong> → <strong>Criar nova</strong> → dê o nome <code>HbOne</code>.</li>
+    <li>Clique dentro da caixa de texto da assinatura e aperte <strong>Ctrl+V</strong>.</li>
+    <li>Logo abaixo, em <strong>Padrões de assinatura</strong>, escolha <code>HbOne</code> para o endereço <code>contato@hbone.com.br</code>, nos e-mails novos e nas respostas.</li>
+    <li>Desça até o fim da página e clique em <strong>Salvar alterações</strong>.</li>
+  </ol>
+</main>
+<script>
+  const botao = document.getElementById('copiar');
+  const aviso = document.getElementById('aviso');
+  const bloco = document.getElementById('assinatura');
+  botao.addEventListener('click', async () => {
+    const html = bloco.innerHTML;
+    const texto = bloco.innerText;
+    try {
+      await navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([texto], { type: 'text/plain' }),
+      })]);
+      aviso.textContent = '✓ Assinatura copiada. Agora cole no Gmail.';
+    } catch {
+      // Navegadores antigos: seleciona a assinatura e copia do jeito tradicional
+      const faixa = document.createRange();
+      faixa.selectNodeContents(bloco);
+      const sel = getSelection();
+      sel.removeAllRanges();
+      sel.addRange(faixa);
+      const ok = document.execCommand('copy');
+      sel.removeAllRanges();
+      aviso.textContent = ok ? '✓ Assinatura copiada. Agora cole no Gmail.' : 'Selecione a assinatura com o mouse e aperte Ctrl+C.';
+    }
+  });
+</script>
+</body>
+</html>
