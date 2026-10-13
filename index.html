@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HbOne Soluções | Sistemas sob medida</title>
-  <meta name="description" content="A HbOne Soluções desenvolve sistemas web, painéis e ferramentas internas sob medida, além de produtos próprios prontos para usar.">
+  <meta name="description" content="A HbOne Soluções desenvolve sistemas web, painéis e ferramentas internas sob medida, com custo acessível e entrega caprichada, além de produtos próprios prontos para usar.">
   <meta name="theme-color" content="#07131f">
   <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://hbone.com.br/">
@@ -290,7 +290,7 @@ display: inline-block; margin-bottom: 10px;
 .secao h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 44px; }
 .secao h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
 .secao p { color: var(--texto-suave); }
-.cartoes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.cartoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 @property --angulo { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .cartao {
 position: relative; isolation: isolate; padding: 34px; border-radius: var(--raio);
@@ -304,7 +304,8 @@ animation: girar 7s linear infinite;
 -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
 -webkit-mask-composite: xor; mask-composite: exclude;
 }
-.cartao:nth-child(2)::before { animation-delay: -3.5s; }
+.cartao:nth-child(2)::before { animation-delay: -2.3s; }
+.cartao:nth-child(3)::before { animation-delay: -4.6s; }
 .cartao:hover::before { background: var(--degrade); }
 .cartao::after {
 content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0; transition: opacity .3s;
@@ -322,6 +323,7 @@ transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
 .cartao:hover .cartao__icone { transform: translateY(-4px) scale(1.06); box-shadow: 0 16px 30px -10px rgb(79 124 255 / .9); }
 .cartao:nth-child(1):hover .cartao__icone svg { animation: pular .7s ease; }
 .cartao:nth-child(2):hover .cartao__icone svg { transform: rotateY(360deg); }
+.cartao:nth-child(3):hover .cartao__icone svg { transform: rotate(-25deg); }
 .etiquetas { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .etiquetas li {
 padding: 5px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
@@ -396,8 +398,8 @@ background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / .09) 50%,
 transform: translateX(-120%);
 }
 .motivos li.visivel::after { animation: reflexo 1.4s ease-out .5s; }
-.motivos li:nth-child(2).visivel::after { animation-delay: .75s; }
-.motivos li:nth-child(3).visivel::after { animation-delay: 1s; }
+.motivos li:nth-child(3n+2).visivel::after { animation-delay: .75s; }
+.motivos li:nth-child(3n).visivel::after { animation-delay: 1s; }
 .motivos li:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--destaque) 60%, transparent); box-shadow: 0 24px 48px -24px rgb(47 211 220 / .45); }
 .motivos li:hover::before { opacity: 1; }
 .motivos__icone {
@@ -408,10 +410,62 @@ transition: background .3s, color .3s, box-shadow .3s;
 }
 .motivos__icone svg { width: 22px; height: 22px; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
 .motivos li:hover .motivos__icone { background: var(--degrade); color: #fff; box-shadow: 0 10px 24px -10px rgb(79 124 255 / .8); }
-.motivos li:nth-child(1):hover .motivos__icone svg { transform: rotate(180deg) scale(1.1); }
-.motivos li:nth-child(2):hover .motivos__icone svg { animation: balancar .6s ease-in-out; }
-.motivos .visto { stroke-dasharray: 10; stroke-dashoffset: 0; }
-.motivos li:nth-child(3):hover .visto { animation: desenhar .5s ease-out .1s both; }
+.motivos li[data-mov="gira"]:hover .motivos__icone svg { transform: rotate(180deg) scale(1.1); }
+.motivos li[data-mov="balanca"]:hover .motivos__icone svg { animation: balancar .6s ease-in-out; }
+.motivos .visto { stroke-dasharray: 14; stroke-dashoffset: 0; }
+.motivos li[data-mov="desenha"]:hover .visto { animation: desenhar .5s ease-out .1s both; }
+.secao--noite { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); }
+.secao--noite::before {
+content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+background:
+radial-gradient(35% 50% at 90% 10%, rgb(139 92 246 / .22), transparent 70%),
+radial-gradient(35% 50% at 5% 95%, rgb(47 211 220 / .16), transparent 70%);
+}
+.secao--noite h2 { color: #fff; }
+.secao h2:has(+ .secao__intro) { margin-bottom: 14px; }
+.secao .secao__intro { max-width: 60ch; margin-bottom: 44px; color: var(--texto-suave); }
+.secao--noite .secao__intro { color: #a9bbcb; }
+.produtos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.produto {
+position: relative; isolation: isolate; overflow: hidden;
+display: flex; flex-direction: column; padding: 30px; border-radius: var(--raio);
+background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1);
+transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.produto::before {
+content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .3s;
+background: radial-gradient(320px circle at var(--x, 50%) var(--y, 0%), rgb(79 124 255 / .18), rgb(47 211 220 / .06) 45%, transparent 70%);
+}
+.produto:hover { transform: translateY(-6px); border-color: rgb(47 211 220 / .45); box-shadow: 0 24px 48px -20px rgb(79 124 255 / .5); }
+.produto:hover::before { opacity: 1; }
+.produto__topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.produto__icone {
+display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px;
+background: var(--degrade); color: #fff; box-shadow: 0 10px 24px -10px rgb(79 124 255 / .7);
+transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.produto__icone svg { width: 26px; height: 26px; }
+.produto:hover .produto__icone { transform: translateY(-4px) rotate(-6deg); }
+.produto h3 { color: #fff; }
+.produto p { color: #a9bbcb; }
+.produto .etiquetas li { color: #b8c7d4; background: rgb(255 255 255 / .05); border-color: rgb(255 255 255 / .12); }
+.produto:hover .etiquetas li { color: #d9fbfd; border-color: rgb(47 211 220 / .45); }
+.estado {
+display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px;
+font-size: 0.78rem; font-weight: 700; color: #d7e6f0;
+background: rgb(255 255 255 / .06); border: 1px solid rgb(255 255 255 / .12);
+}
+.estado::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.estado--disponivel::before { background: #45d483; box-shadow: 0 0 0 0 rgb(69 212 131 / .6); animation: pulsar-verde 2s infinite; }
+.estado--teste::before { background: var(--azul); }
+.estado--breve::before { background: var(--violeta); }
+.produto__acao {
+display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 24px; align-self: flex-start;
+font-weight: 700; color: var(--ciano); text-decoration: none;
+}
+.produto__acao svg { width: 18px; height: 18px; transition: transform .2s; }
+.produto__acao:hover { color: #fff; }
+.produto__acao:hover svg { transform: translateX(4px); }
 .contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
 .contato__brilho {
 position: absolute; inset: 0; z-index: -1;
@@ -460,8 +514,9 @@ border-top: 1px solid rgb(255 255 255 / .06);
 .js .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
 .js .revelar.visivel { opacity: 1; transform: none; }
 .js .cartao.revelar.visivel,
+.js .produto.revelar.visivel,
 .js .motivos li.revelar.visivel { transition: opacity .7s ease, transform .25s, border-color .25s, box-shadow .25s; }
-.js .cartao.visivel:hover, .js .motivos li.visivel:hover, .js .passos li.visivel:hover { transform: translateY(-6px); }
+.js .produto.visivel:hover, .js .cartao.visivel:hover, .js .motivos li.visivel:hover, .js .passos li.visivel:hover { transform: translateY(-6px); }
 @keyframes pulsar {
 70% { box-shadow: 0 0 0 10px rgb(47 211 220 / 0); }
 100% { box-shadow: 0 0 0 0 rgb(47 211 220 / 0); }
@@ -474,6 +529,10 @@ border-top: 1px solid rgb(255 255 255 / .06);
 @keyframes boiar { 50% { transform: translateY(-10px); } }
 @keyframes crescer { from { transform: scaleY(0); } }
 @keyframes girar { to { --angulo: 360deg; } }
+@keyframes pulsar-verde {
+70% { box-shadow: 0 0 0 8px rgb(69 212 131 / 0); }
+100% { box-shadow: 0 0 0 0 rgb(69 212 131 / 0); }
+}
 @keyframes fluir { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 @keyframes pular {
 30% { transform: translateY(-5px); }
@@ -487,7 +546,7 @@ border-top: 1px solid rgb(255 255 255 / .06);
 70% { transform: rotate(-6deg); }
 100% { transform: rotate(0); }
 }
-@keyframes desenhar { from { stroke-dashoffset: 10; } to { stroke-dashoffset: 0; } }
+@keyframes desenhar { from { stroke-dashoffset: 14; } to { stroke-dashoffset: 0; } }
 @keyframes viajar {
 0% { left: 24px; opacity: 0; }
 10% { opacity: 1; }
@@ -506,6 +565,7 @@ html { scroll-behavior: auto; }
 @media (max-width: 960px) {
 .abertura__linha { grid-template-columns: 1fr; gap: 64px; }
 .rodape__grade { grid-template-columns: 1fr 1fr; }
+.cartoes { grid-template-columns: 1fr; }
 .rodape__marca { grid-column: 1 / -1; }
 .vitrine { max-width: 520px; margin: 0 auto; width: 100%; }
 .passos { grid-template-columns: repeat(2, 1fr); }
@@ -517,7 +577,8 @@ html { scroll-behavior: auto; }
 .topo nav a:not(.topo__contato) { display: none; }
 .abertura { padding: 116px 0 80px; }
 .secao, .contato { padding: 72px 0; }
-.cartoes, .passos { grid-template-columns: 1fr; }
+.cartoes, .passos, .produtos { grid-template-columns: 1fr; }
+.produto { padding: 24px; }
 .passos::after { display: none; }
 .passos li:not(:last-child)::after {
 content: ""; position: absolute; left: 23px; top: 48px; bottom: -28px; width: 2px;
@@ -543,7 +604,7 @@ transition: transform .45s ease-out;
 }
   </style>
   <!-- css:fim -->
-  <script src="js/site.js?v=5" defer></script>
+  <script src="js/site.js?v=6" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -556,6 +617,7 @@ transition: transform .45s ease-out;
       <nav aria-label="Principal">
         <a href="#servicos">Serviços</a>
         <a href="#como">Como trabalhamos</a>
+        <a href="#produtos">Produtos</a>
         <a class="topo__contato" href="#contato">Contato</a>
       </nav>
     </div>
@@ -571,16 +633,16 @@ transition: transform .45s ease-out;
           <p class="selo"><span class="selo__ponto"></span>Sistemas sob medida</p>
           <h1>Tecnologia feita para <span class="degrade">o&nbsp;jeito que o&nbsp;seu negócio funciona.</span></h1>
           <p class="abertura__desc">
-            Sistemas web, painéis e ferramentas internas sob medida, além de produtos
-            próprios prontos para usar. Tudo leve, funcionando no celular e com
-            acompanhamento de perto, do primeiro esboço ao uso no dia a dia.
+            Sistemas web, painéis e ferramentas internas sob medida, com custo acessível
+            e entrega caprichada, além de produtos próprios prontos para usar. Tudo leve,
+            funcionando no celular e com acompanhamento de perto.
           </p>
           <div class="botoes">
             <a class="botao botao--principal" href="mailto:hbonesolucoes@gmail.com?subject=Contato%20pelo%20site%20HbOne" data-copiar="hbonesolucoes@gmail.com">
               Fale com a HbOne
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a class="botao botao--vidro" href="#como">Como trabalhamos</a>
+            <a class="botao botao--vidro" href="#produtos">Ver produtos</a>
           </div>
         </div>
 
@@ -623,32 +685,30 @@ transition: transform .45s ease-out;
 
     <section id="servicos" class="secao">
       <div class="largura">
-        <p class="rotulo revelar">Serviços</p>
-        <h2 class="revelar">O que fazemos</h2>
+        <p class="rotulo revelar">Sob medida</p>
+        <h2 class="revelar">Sistemas feitos para o seu negócio</h2>
+        <p class="secao__intro revelar">Desenhados a partir do processo da sua equipe, e não o contrário. Planilhas espalhadas e controles manuais viram um sistema simples, organizado e acessível de qualquer lugar.</p>
         <div class="cartoes">
           <article class="cartao revelar">
             <span class="cartao__icone">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H4z M8 19h8 M12 15v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10 M10 20V4 M16 20v-7 M22 20H2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <h3>Sistemas sob medida</h3>
-            <p>
-              Painéis de acompanhamento, sistemas web e ferramentas internas desenhados
-              a partir do processo da sua equipe, e não o contrário. Planilhas espalhadas
-              e controles manuais viram um sistema simples, organizado e acessível de qualquer lugar.
-            </p>
-            <ul class="etiquetas"><li>Painéis</li><li>Sistemas web</li><li>Ferramentas internas</li></ul>
+            <h3>Painéis de acompanhamento</h3>
+            <p>Os números do seu negócio atualizados num painel só: indicadores, metas e o que precisa de atenção hoje.</p>
           </article>
           <article class="cartao revelar">
             <span class="cartao__icone">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z M3 9h18 M6.5 7h.01 M9 7h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <h3>Produtos próprios</h3>
-            <p>
-              Soluções prontas que a HbOne desenvolve e mantém, pensadas para problemas
-              comuns de pequenos e médios negócios. Você começa a usar rápido, paga um valor
-              fixo e recebe as melhorias sem custo extra.
-            </p>
-            <ul class="etiquetas"><li>Prontos para usar</li><li>Valor fixo</li><li>Melhorias contínuas</li></ul>
+            <h3>Sistemas web</h3>
+            <p>Cadastros, pedidos, agendamentos e aprovações funcionando no navegador e no celular, sem instalar nada.</p>
+          </article>
+          <article class="cartao revelar">
+            <span class="cartao__icone">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L4 16.8 7.2 20l5.3-5.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Ferramentas internas</h3>
+            <p>Controles, relatórios e tarefas que hoje dependem de planilha viram ferramentas próprias, sem retrabalho.</p>
           </article>
         </div>
       </div>
@@ -679,25 +739,90 @@ transition: transform .45s ease-out;
       </div>
     </section>
 
+    <section id="produtos" class="secao secao--noite">
+      <div class="largura">
+        <p class="rotulo revelar">Produtos</p>
+        <h2 class="revelar">Soluções prontas para usar</h2>
+        <p class="secao__intro revelar">Sistemas da HbOne que o seu negócio começa a usar sem precisar desenvolver do zero.</p>
+        <div class="produtos">
+          <article class="produto revelar">
+            <div class="produto__topo">
+              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="estado estado--breve">Em breve</span>
+            </div>
+            <h3>Menu Manaus</h3>
+            <p>Cardápio digital para lanchonetes, açaiterias, cafeterias, pizzarias e restaurantes: o pedido cai direto no painel da loja, sem comissão por venda.</p>
+            <ul class="etiquetas"><li>Cardápio online</li><li>Pix</li><li>Painel de pedidos</li></ul>
+            <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20Menu%20Manaus." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <article class="produto revelar">
+            <div class="produto__topo">
+              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v5H4z M14 15h6v5h-6z M7 9v4a2 2 0 0 0 2 2h5 M14 6.5h6 M17 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="estado estado--teste">Em teste</span>
+            </div>
+            <h3>Gestão de Processos</h3>
+            <p>Organograma, macroprocessos, processos, fluxogramas e responsáveis da empresa reunidos num só lugar. Cada pessoa sabe o seu papel, cada etapa tem dono e o jeito de trabalhar não se perde quando alguém sai da equipe.</p>
+            <ul class="etiquetas"><li>Organograma</li><li>Macroprocessos</li><li>Fluxogramas</li><li>Responsáveis</li></ul>
+            <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Gest%C3%A3o%20de%20Processos." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <article class="produto revelar">
+            <div class="produto__topo">
+              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4z M3 20c0-3.2 2.7-5.4 6-5.4s6 2.2 6 5.4 M15.5 11l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="estado estado--disponivel">Disponível</span>
+            </div>
+            <h3>Check-in de Eventos</h3>
+            <p>Credenciamento com tablets na recepção, atenção especial aos convidados VIP e lista de presença ao vivo. No fim do evento, um painel mostra os números que importam: quem veio, quem faltou e como foi a chegada.</p>
+            <ul class="etiquetas"><li>Convidados VIP</li><li>Presença ao vivo</li><li>Painel de dados</li></ul>
+            <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20Check-in%20de%20Eventos." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+          <article class="produto revelar">
+            <div class="produto__topo">
+              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5 M10 12.5h6 M10 16.5h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="estado estado--teste">Em teste</span>
+            </div>
+            <h3>Atas de Reunião</h3>
+            <p>Registro da reunião, das decisões e de cada ação combinada, com o responsável por ela. A ata sai pronta para revisar e assinar, e ninguém esquece o que ficou de fazer.</p>
+            <ul class="etiquetas"><li>Decisões</li><li>Ações</li><li>Responsáveis</li></ul>
+            <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20as%20Atas%20de%20Reuni%C3%A3o." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="diferenciais" class="secao">
       <div class="largura">
         <p class="rotulo revelar">Diferenciais</p>
         <h2 class="revelar">Por que a HbOne?</h2>
         <ul class="motivos">
-          <li class="revelar">
-            <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <li class="revelar" data-mov="gira">
+            <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12.5V4h8.5l9 9-8.5 8.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 8.2h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Custo acessível</h3>
+            <p>Sistemas enxutos, com preço pensado para pequenos e médios negócios: sem licenças caras nem recursos que você não vai usar.</p>
+          </li>
+          <li class="revelar" data-mov="desenha">
+            <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="visto" d="M8 12.2l2.8 2.8L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Entrega caprichada</h3>
+            <p>Você testa antes, a gente ajusta junto e o sistema só vai para o ar quando está redondo, com treinamento incluído.</p>
+          </li>
+          <li class="revelar" data-mov="gira">
+            <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <h3>Feito para você</h3>
             <p>Nada de pacote engessado: o sistema segue o seu processo e cresce com ele.</p>
           </li>
-          <li class="revelar">
+          <li class="revelar" data-mov="balanca">
             <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z M11 18h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <h3>Funciona no celular</h3>
             <p>Telas leves e rápidas, que funcionam bem até com internet fraca.</p>
           </li>
-          <li class="revelar">
+          <li class="revelar" data-mov="desenha">
             <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="visto" d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <h3>Sem dor de cabeça</h3>
             <p>Hospedagem, segurança e manutenção ficam com a gente.</p>
+          </li>
+          <li class="revelar" data-mov="balanca">
+            <span class="motivos__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9.5L4 20z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Atendimento direto</h3>
+            <p>Você fala com quem desenvolve o seu sistema, sem intermediários nem fila de chamados.</p>
           </li>
         </ul>
       </div>
@@ -741,6 +866,7 @@ transition: transform .45s ease-out;
         <ul>
           <li><a href="#servicos">Serviços</a></li>
           <li><a href="#como">Como trabalhamos</a></li>
+          <li><a href="#produtos">Produtos</a></li>
           <li><a href="#diferenciais">Por que a HbOne</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>

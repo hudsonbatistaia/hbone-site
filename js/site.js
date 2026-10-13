@@ -16,7 +16,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // Serviços e diferenciais: a luz do cartão segue o mouse
-for (const cartao of document.querySelectorAll('.cartao, .motivos li')) {
+for (const cartao of document.querySelectorAll('.cartao, .produto, .motivos li')) {
   cartao.addEventListener('pointermove', (e) => {
     const caixa = cartao.getBoundingClientRect();
     cartao.style.setProperty('--x', `${e.clientX - caixa.left}px`);
@@ -88,7 +88,7 @@ if ('IntersectionObserver' in window) {
   const vigia = new IntersectionObserver((entradas) => {
     for (const e of entradas) e.target.classList.toggle('pausado', !e.isIntersecting);
   });
-  document.querySelectorAll('.abertura, .cartoes, .passos, .contato').forEach((el) => vigia.observe(el));
+  document.querySelectorAll('.abertura, .cartoes, .produtos, .passos, .contato').forEach((el) => vigia.observe(el));
 
   itens.forEach((item, i) => {
     item.style.transitionDelay = `${(i % 4) * 80}ms`;

@@ -274,7 +274,7 @@ main:focus { outline: none; }
 .secao h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
 .secao p { color: var(--texto-suave); }
 
-.cartoes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.cartoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 /* Ângulo animável da luz que contorna a borda */
 @property --angulo { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 
@@ -291,7 +291,8 @@ main:focus { outline: none; }
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
 }
-.cartao:nth-child(2)::before { animation-delay: -3.5s; }
+.cartao:nth-child(2)::before { animation-delay: -2.3s; }
+.cartao:nth-child(3)::before { animation-delay: -4.6s; }
 .cartao:hover::before { background: var(--degrade); }
 /* Luz que acompanha o mouse (posição vem do js/site.js) */
 .cartao::after {
@@ -311,6 +312,7 @@ main:focus { outline: none; }
 /* Monitor "liga" e pula; a caixa gira */
 .cartao:nth-child(1):hover .cartao__icone svg { animation: pular .7s ease; }
 .cartao:nth-child(2):hover .cartao__icone svg { transform: rotateY(360deg); }
+.cartao:nth-child(3):hover .cartao__icone svg { transform: rotate(-25deg); }
 
 .etiquetas { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .etiquetas li {
@@ -396,8 +398,8 @@ main:focus { outline: none; }
   transform: translateX(-120%);
 }
 .motivos li.visivel::after { animation: reflexo 1.4s ease-out .5s; }
-.motivos li:nth-child(2).visivel::after { animation-delay: .75s; }
-.motivos li:nth-child(3).visivel::after { animation-delay: 1s; }
+.motivos li:nth-child(3n+2).visivel::after { animation-delay: .75s; }
+.motivos li:nth-child(3n).visivel::after { animation-delay: 1s; }
 .motivos li:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--destaque) 60%, transparent); box-shadow: 0 24px 48px -24px rgb(47 211 220 / .45); }
 .motivos li:hover::before { opacity: 1; }
 
@@ -410,10 +412,70 @@ main:focus { outline: none; }
 .motivos__icone svg { width: 22px; height: 22px; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
 .motivos li:hover .motivos__icone { background: var(--degrade); color: #fff; box-shadow: 0 10px 24px -10px rgb(79 124 255 / .8); }
 /* Cada ícone com o seu movimento */
-.motivos li:nth-child(1):hover .motivos__icone svg { transform: rotate(180deg) scale(1.1); }
-.motivos li:nth-child(2):hover .motivos__icone svg { animation: balancar .6s ease-in-out; }
-.motivos .visto { stroke-dasharray: 10; stroke-dashoffset: 0; }
-.motivos li:nth-child(3):hover .visto { animation: desenhar .5s ease-out .1s both; }
+.motivos li[data-mov="gira"]:hover .motivos__icone svg { transform: rotate(180deg) scale(1.1); }
+.motivos li[data-mov="balanca"]:hover .motivos__icone svg { animation: balancar .6s ease-in-out; }
+.motivos .visto { stroke-dasharray: 14; stroke-dashoffset: 0; }
+.motivos li[data-mov="desenha"]:hover .visto { animation: desenhar .5s ease-out .1s both; }
+
+/* ---------- Produtos (vitrine em fundo escuro nos dois temas) ---------- */
+.secao--noite { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); }
+.secao--noite::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(35% 50% at 90% 10%, rgb(139 92 246 / .22), transparent 70%),
+    radial-gradient(35% 50% at 5% 95%, rgb(47 211 220 / .16), transparent 70%);
+}
+.secao--noite h2 { color: #fff; }
+/* frase de introdução logo abaixo do título da seção */
+.secao h2:has(+ .secao__intro) { margin-bottom: 14px; }
+.secao .secao__intro { max-width: 60ch; margin-bottom: 44px; color: var(--texto-suave); }
+.secao--noite .secao__intro { color: #a9bbcb; }
+
+.produtos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.produto {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; padding: 30px; border-radius: var(--raio);
+  background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1);
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+/* luz que segue o mouse (posição vem do js/site.js) */
+.produto::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(320px circle at var(--x, 50%) var(--y, 0%), rgb(79 124 255 / .18), rgb(47 211 220 / .06) 45%, transparent 70%);
+}
+.produto:hover { transform: translateY(-6px); border-color: rgb(47 211 220 / .45); box-shadow: 0 24px 48px -20px rgb(79 124 255 / .5); }
+.produto:hover::before { opacity: 1; }
+.produto__topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.produto__icone {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px;
+  background: var(--degrade); color: #fff; box-shadow: 0 10px 24px -10px rgb(79 124 255 / .7);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.produto__icone svg { width: 26px; height: 26px; }
+.produto:hover .produto__icone { transform: translateY(-4px) rotate(-6deg); }
+.produto h3 { color: #fff; }
+.produto p { color: #a9bbcb; }
+.produto .etiquetas li { color: #b8c7d4; background: rgb(255 255 255 / .05); border-color: rgb(255 255 255 / .12); }
+.produto:hover .etiquetas li { color: #d9fbfd; border-color: rgb(47 211 220 / .45); }
+
+/* Situação do produto: ponto colorido + texto (a cor nunca vem sozinha) */
+.estado {
+  display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 700; color: #d7e6f0;
+  background: rgb(255 255 255 / .06); border: 1px solid rgb(255 255 255 / .12);
+}
+.estado::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.estado--disponivel::before { background: #45d483; box-shadow: 0 0 0 0 rgb(69 212 131 / .6); animation: pulsar-verde 2s infinite; }
+.estado--teste::before { background: var(--azul); }
+.estado--breve::before { background: var(--violeta); }
+
+.produto__acao {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 24px; align-self: flex-start;
+  font-weight: 700; color: var(--ciano); text-decoration: none;
+}
+.produto__acao svg { width: 18px; height: 18px; transition: transform .2s; }
+.produto__acao:hover { color: #fff; }
+.produto__acao:hover svg { transform: translateX(4px); }
 
 /* ---------- Contato ---------- */
 .contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
@@ -475,9 +537,10 @@ main:focus { outline: none; }
 .js .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
 .js .revelar.visivel { opacity: 1; transform: none; }
 .js .cartao.revelar.visivel,
+.js .produto.revelar.visivel,
 .js .motivos li.revelar.visivel { transition: opacity .7s ease, transform .25s, border-color .25s, box-shadow .25s; }
 /* depois de aparecer, o "subir" do passar do mouse continua valendo */
-.js .cartao.visivel:hover, .js .motivos li.visivel:hover, .js .passos li.visivel:hover { transform: translateY(-6px); }
+.js .produto.visivel:hover, .js .cartao.visivel:hover, .js .motivos li.visivel:hover, .js .passos li.visivel:hover { transform: translateY(-6px); }
 
 /* ---------- Animações ---------- */
 @keyframes pulsar {
@@ -492,6 +555,10 @@ main:focus { outline: none; }
 @keyframes boiar { 50% { transform: translateY(-10px); } }
 @keyframes crescer { from { transform: scaleY(0); } }
 @keyframes girar { to { --angulo: 360deg; } }
+@keyframes pulsar-verde {
+  70% { box-shadow: 0 0 0 8px rgb(69 212 131 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(69 212 131 / 0); }
+}
 @keyframes fluir { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 @keyframes pular {
   30% { transform: translateY(-5px); }
@@ -505,7 +572,7 @@ main:focus { outline: none; }
   70% { transform: rotate(-6deg); }
   100% { transform: rotate(0); }
 }
-@keyframes desenhar { from { stroke-dashoffset: 10; } to { stroke-dashoffset: 0; } }
+@keyframes desenhar { from { stroke-dashoffset: 14; } to { stroke-dashoffset: 0; } }
 @keyframes viajar {
   0% { left: 24px; opacity: 0; }
   10% { opacity: 1; }
@@ -527,6 +594,7 @@ main:focus { outline: none; }
 @media (max-width: 960px) {
   .abertura__linha { grid-template-columns: 1fr; gap: 64px; }
   .rodape__grade { grid-template-columns: 1fr 1fr; }
+  .cartoes { grid-template-columns: 1fr; }
   .rodape__marca { grid-column: 1 / -1; }
   .vitrine { max-width: 520px; margin: 0 auto; width: 100%; }
   .passos { grid-template-columns: repeat(2, 1fr); }
@@ -538,7 +606,8 @@ main:focus { outline: none; }
   .topo nav a:not(.topo__contato) { display: none; }
   .abertura { padding: 116px 0 80px; }
   .secao, .contato { padding: 72px 0; }
-  .cartoes, .passos { grid-template-columns: 1fr; }
+  .cartoes, .passos, .produtos { grid-template-columns: 1fr; }
+  .produto { padding: 24px; }
   /* Passos em coluna: a linha desce ligando os números */
   .passos::after { display: none; }
   .passos li:not(:last-child)::after {
