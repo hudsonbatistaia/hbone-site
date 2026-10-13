@@ -14,6 +14,7 @@
   --violeta: #8b5cf6;
   --noite: #07131f;
   --degrade: linear-gradient(100deg, var(--ciano) 0%, var(--azul) 55%, var(--violeta) 100%);
+  --degrade-botao: linear-gradient(100deg, #157a8a 0%, #3a5ed8 55%, #7445d8 100%);
   --raio: 18px;
   --sombra: 0 1px 2px rgb(11 31 51 / .06), 0 12px 32px -12px rgb(11 31 51 / .18);
   --fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -188,8 +189,9 @@ main:focus { outline: none; }
 }
 .botao svg { width: 18px; height: 18px; transition: transform .2s; }
 .botao:hover svg { transform: translateX(3px); }
+/* degradê dos botões: mesmas cores, mais fechadas, para o texto branco ter contraste */
 .botao--principal {
-  color: #fff; background: var(--degrade); background-size: 160% 100%;
+  color: #fff; background: var(--degrade-botao); background-size: 160% 100%;
   box-shadow: 0 10px 30px -8px rgb(79 124 255 / .6);
 }
 .botao--principal:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -8px rgb(79 124 255 / .75); background-position: 100% 0; }
@@ -488,7 +490,37 @@ main:focus { outline: none; }
 .contato h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
 .contato p { margin: 16px auto 34px; max-width: 46ch; color: #a9bbcb; }
 .contato .botao { overflow-wrap: anywhere; }
-.botoes--centro { justify-content: center; margin-top: 0; }
+.botoes--centro { justify-content: center; align-items: center; margin-top: 0; gap: 22px; }
+
+/* ---------- "Fale com a HbOne": balão de vidro com WhatsApp e E-mail ---------- */
+.fale { position: relative; }
+.fale__seta { width: 16px !important; height: 16px !important; opacity: .85; transition: transform .25s !important; }
+.botao:hover .fale__seta { transform: none; }
+.fale.aberto .fale__seta { transform: rotate(180deg) !important; }
+.fale__balao {
+  position: absolute; top: calc(100% + 10px); left: 0; z-index: 30; min-width: 300px; padding: 6px; border-radius: 16px;
+  background: rgb(13 26 40 / .78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / .09); box-shadow: 0 18px 40px -18px rgb(0 0 0 / .75);
+  opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top left; transition: opacity .18s ease, transform .18s ease;
+}
+.fale.aberto .fale__balao { opacity: 1; transform: none; }
+.fale__opcao {
+  display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 11px; white-space: nowrap;
+  color: #dbe6ef; font-size: .93rem; font-weight: 500; text-decoration: none; transition: background-color .15s, color .15s;
+}
+.fale__opcao svg { width: 18px; height: 18px; flex: none; color: #8ea4b6; transition: color .15s; }
+.fale__opcao em { margin-left: auto; padding-left: 18px; font-style: normal; font-size: .8rem; color: #6f8496; }
+.fale__opcao:hover, .fale__opcao:focus-visible { background: rgb(255 255 255 / .06); color: #fff; }
+.fale__opcao:hover svg, .fale__opcao:focus-visible svg { color: var(--ciano); }
+
+/* E-mail como link discreto, ao lado do botão do WhatsApp */
+.contato__email {
+  display: inline-flex; align-items: center; gap: 8px; padding-bottom: 2px;
+  color: #b8c7d4; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgb(184 199 212 / .3);
+  transition: color .2s, border-color .2s;
+}
+.contato__email svg { width: 16px; height: 16px; }
+.contato__email:hover { color: #fff; border-color: var(--ciano); }
 
 /* Balão "E-mail copiado" (aparece embaixo, visível de qualquer parte da página) */
 .aviso {
@@ -626,6 +658,9 @@ main:focus { outline: none; }
   .rodape .rodape__grade { padding: 48px 16px 40px; }
   .rodape .rodape__base { padding: 20px 16px 24px; }
   .botoes .botao { flex: 1 1 100%; }
+  .fale { flex: 1 1 100%; }
+  .fale .botao { width: 100%; }
+  .fale__balao { left: 0; right: 0; min-width: 0; }
   .tela { transform: none; animation: none; }
   .tela__corpo { grid-template-columns: 48px 1fr; min-height: 240px; }
   .flutuante--a { left: -6px; bottom: -20px; }

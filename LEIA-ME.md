@@ -20,8 +20,8 @@ assinatura/           assinatura de e-mail (https://hbone.com.br/assinatura/): p
 ```
 
 ## Onde mudar o texto
-- **E-mail de contato:** procure `contato@hbone.com.br` em `index.html`. Troque todas as ocorrências: ele aparece no `mailto:` e no `data-copiar` dos dois botões (topo e contato), no texto do botão do contato, no rodapé e nos dados para o Google.
-- **WhatsApp e Instagram:** ficam no rodapé (ícones e coluna Contato) e nos dados para o Google. Procure `5592992005797` e `instagram.com/hbonesolucoes`.
+- **E-mail de contato:** procure `contato@hbone.com.br` em `index.html`. Troque todas as ocorrências: ele aparece no balão do botão "Fale com a HbOne" (abertura), no link de e-mail da seção de contato, no rodapé e nos dados para o Google (em `mailto:`, `data-copiar` e no texto).
+- **WhatsApp e Instagram:** o WhatsApp está no balão da abertura, no botão "Conversar no WhatsApp" (contato), nos 4 produtos ("Quero conhecer") e no rodapé; o Instagram, no rodapé. Ambos também nos dados para o Google. Procure `5592992005797` e `instagram.com/hbonesolucoes`.
 - **Cores:** as variáveis `--ciano`, `--azul`, `--violeta` e `--marca` no topo de `css/site.css`.
 - **Depois de mudar o CSS:** edite só o `css/site.css` e rode `node montar.mjs`, que copia o CSS para dentro do `index.html` (assim a página abre mais rápido no celular). Aumente também o `?v=` do CSS no `404.html`.
 - **Depois de mudar o JS:** aumente o número em `site.js?v=…` no `index.html`. **É obrigatório:** o navegador guarda o arquivo por 1 ano e só busca o novo quando o número muda.

@@ -56,6 +56,7 @@
 --violeta: #8b5cf6;
 --noite: #07131f;
 --degrade: linear-gradient(100deg, var(--ciano) 0%, var(--azul) 55%, var(--violeta) 100%);
+--degrade-botao: linear-gradient(100deg, #157a8a 0%, #3a5ed8 55%, #7445d8 100%);
 --raio: 18px;
 --sombra: 0 1px 2px rgb(11 31 51 / .06), 0 12px 32px -12px rgb(11 31 51 / .18);
 --fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -211,7 +212,7 @@ transition: transform .2s, box-shadow .2s, background-color .2s;
 .botao svg { width: 18px; height: 18px; transition: transform .2s; }
 .botao:hover svg { transform: translateX(3px); }
 .botao--principal {
-color: #fff; background: var(--degrade); background-size: 160% 100%;
+color: #fff; background: var(--degrade-botao); background-size: 160% 100%;
 box-shadow: 0 10px 30px -8px rgb(79 124 255 / .6);
 }
 .botao--principal:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -8px rgb(79 124 255 / .75); background-position: 100% 0; }
@@ -476,7 +477,33 @@ radial-gradient(40% 70% at 80% 0%, rgb(139 92 246 / .28), transparent 70%);
 .contato h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
 .contato p { margin: 16px auto 34px; max-width: 46ch; color: #a9bbcb; }
 .contato .botao { overflow-wrap: anywhere; }
-.botoes--centro { justify-content: center; margin-top: 0; }
+.botoes--centro { justify-content: center; align-items: center; margin-top: 0; gap: 22px; }
+.fale { position: relative; }
+.fale__seta { width: 16px !important; height: 16px !important; opacity: .85; transition: transform .25s !important; }
+.botao:hover .fale__seta { transform: none; }
+.fale.aberto .fale__seta { transform: rotate(180deg) !important; }
+.fale__balao {
+position: absolute; top: calc(100% + 10px); left: 0; z-index: 30; min-width: 300px; padding: 6px; border-radius: 16px;
+background: rgb(13 26 40 / .78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+border: 1px solid rgb(255 255 255 / .09); box-shadow: 0 18px 40px -18px rgb(0 0 0 / .75);
+opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top left; transition: opacity .18s ease, transform .18s ease;
+}
+.fale.aberto .fale__balao { opacity: 1; transform: none; }
+.fale__opcao {
+display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 11px; white-space: nowrap;
+color: #dbe6ef; font-size: .93rem; font-weight: 500; text-decoration: none; transition: background-color .15s, color .15s;
+}
+.fale__opcao svg { width: 18px; height: 18px; flex: none; color: #8ea4b6; transition: color .15s; }
+.fale__opcao em { margin-left: auto; padding-left: 18px; font-style: normal; font-size: .8rem; color: #6f8496; }
+.fale__opcao:hover, .fale__opcao:focus-visible { background: rgb(255 255 255 / .06); color: #fff; }
+.fale__opcao:hover svg, .fale__opcao:focus-visible svg { color: var(--ciano); }
+.contato__email {
+display: inline-flex; align-items: center; gap: 8px; padding-bottom: 2px;
+color: #b8c7d4; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgb(184 199 212 / .3);
+transition: color .2s, border-color .2s;
+}
+.contato__email svg { width: 16px; height: 16px; }
+.contato__email:hover { color: #fff; border-color: var(--ciano); }
 .aviso {
 position: fixed; left: 50%; bottom: 24px; z-index: 40; margin: 0;
 max-width: calc(100% - 32px); padding: 12px 20px; border-radius: 999px;
@@ -596,6 +623,9 @@ transition: transform .45s ease-out;
 .rodape .rodape__grade { padding: 48px 16px 40px; }
 .rodape .rodape__base { padding: 20px 16px 24px; }
 .botoes .botao { flex: 1 1 100%; }
+.fale { flex: 1 1 100%; }
+.fale .botao { width: 100%; }
+.fale__balao { left: 0; right: 0; min-width: 0; }
 .tela { transform: none; animation: none; }
 .tela__corpo { grid-template-columns: 48px 1fr; min-height: 240px; }
 .flutuante--a { left: -6px; bottom: -20px; }
@@ -604,7 +634,7 @@ transition: transform .45s ease-out;
 }
   </style>
   <!-- css:fim -->
-  <script src="js/site.js?v=6" defer></script>
+  <script src="js/site.js?v=7" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -638,10 +668,16 @@ transition: transform .45s ease-out;
             funcionando no celular e com acompanhamento de perto.
           </p>
           <div class="botoes">
-            <a class="botao botao--principal" href="mailto:contato@hbone.com.br?subject=Contato%20pelo%20site%20HbOne" data-copiar="contato@hbone.com.br">
-              Fale com a HbOne
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+            <div class="fale">
+              <a class="botao botao--principal fale__botao" href="#contato" aria-controls="fale-opcoes">
+                Fale com a HbOne
+                <svg class="fale__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="fale__balao" id="fale-opcoes" hidden>
+                <a class="fale__opcao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Vi%20o%20site%20da%20HbOne%20e%20quero%20conversar%20sobre%20um%20sistema." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>WhatsApp<em>(92) 99200-5797</em></a>
+                <a class="fale__opcao" href="mailto:contato@hbone.com.br?subject=Contato%20pelo%20site%20HbOne" data-copiar="contato@hbone.com.br"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>E-mail<em>contato@hbone.com.br</em></a>
+              </div>
+            </div>
             <a class="botao botao--vidro" href="#produtos">Ver produtos</a>
           </div>
         </div>
@@ -832,12 +868,13 @@ transition: transform .45s ease-out;
       <div class="contato__brilho" aria-hidden="true"></div>
       <div class="largura contato__conteudo revelar">
         <h2>Vamos tirar a sua ideia do papel?</h2>
-        <p>Conte o que você precisa. Respondemos por e-mail com os próximos passos.</p>
+        <p>Conte o que você precisa. Respondemos com os próximos passos.</p>
         <div class="botoes botoes--centro">
-          <a class="botao botao--principal" href="mailto:contato@hbone.com.br?subject=Contato%20pelo%20site%20HbOne" data-copiar="contato@hbone.com.br">
-            contato@hbone.com.br
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a class="botao botao--principal" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Vi%20o%20site%20da%20HbOne%20e%20quero%20conversar%20sobre%20um%20sistema." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Conversar no WhatsApp
           </a>
+          <a class="contato__email" href="mailto:contato@hbone.com.br?subject=Contato%20pelo%20site%20HbOne" data-copiar="contato@hbone.com.br"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>contato@hbone.com.br</a>
         </div>
       </div>
     </section>

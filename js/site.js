@@ -41,6 +41,39 @@ if ('IntersectionObserver' in window && linksMenu.length) {
   }
 }
 
+// "Fale com a HbOne": abre o balão com WhatsApp e E-mail.
+// Sem JavaScript, o botão continua levando à seção de contato.
+const fale = document.querySelector('.fale');
+if (fale) {
+  const botaoFale = fale.querySelector('.fale__botao');
+  const balao = fale.querySelector('.fale__balao');
+  botaoFale.setAttribute('role', 'button');
+  botaoFale.setAttribute('aria-haspopup', 'true');
+  botaoFale.setAttribute('aria-expanded', 'false');
+  const abrir = () => {
+    balao.hidden = false;
+    requestAnimationFrame(() => fale.classList.add('aberto'));
+    botaoFale.setAttribute('aria-expanded', 'true');
+  };
+  const fechar = (voltarFoco) => {
+    fale.classList.remove('aberto');
+    botaoFale.setAttribute('aria-expanded', 'false');
+    setTimeout(() => { if (!fale.classList.contains('aberto')) balao.hidden = true; }, 200);
+    if (voltarFoco) botaoFale.focus();
+  };
+  botaoFale.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (fale.classList.contains('aberto')) fechar(); else { abrir(); }
+  });
+  botaoFale.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); abrir(); balao.querySelector('a').focus(); }
+    if (e.key === ' ') { e.preventDefault(); botaoFale.click(); } // botão de verdade também abre com a barra de espaço
+  });
+  document.addEventListener('click', (e) => { if (!fale.contains(e.target) && fale.classList.contains('aberto')) fechar(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && fale.classList.contains('aberto')) fechar(true); });
+  balao.addEventListener('click', (e) => { if (e.target.closest('a')) setTimeout(() => fechar(), 150); });
+}
+
 // Botões de e-mail: além de abrir o programa de e-mail, copiam o endereço
 // (muita gente não tem programa de e-mail configurado no computador)
 const aviso = document.querySelector('.aviso');
