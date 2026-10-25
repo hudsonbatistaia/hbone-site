@@ -467,8 +467,14 @@ font-weight: 700; color: var(--ciano); text-decoration: none;
 .produto__acao svg { width: 18px; height: 18px; transition: transform .2s; }
 .produto__acao:hover { color: #fff; }
 .produto__acao:hover svg { transform: translateX(4px); }
-.produto__acoes { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: auto; }
-.produto__acoes .produto__acao { margin-top: 0; }
+.produto__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: auto; padding-top: 24px; }
+.produto__acoes .produto__acao { margin-top: 0; padding-top: 0; }
+.produto--fale { overflow: visible; }
+.produto--fale::before { border-radius: var(--raio); }
+.fale--cartao .botao { min-height: 40px; padding: 8px 18px; font-size: .9rem; gap: 8px; }
+.fale--cartao .fale__seta { width: 14px !important; height: 14px !important; }
+.fale--cartao .fale__balao { top: auto; bottom: calc(100% + 10px); transform-origin: bottom left; transform: translateY(6px) scale(.98); }
+.fale--cartao.aberto .fale__balao { transform: none; }
 .produto__acao--demo { color: #fff; }
 .produto__acao--demo:hover { color: var(--ciano); }
 .contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
@@ -636,9 +642,11 @@ transition: transform .45s ease-out;
 .flutuante--b { right: -6px; top: -26px; }
 .flutuante { padding: 10px 12px; }
 }
+@media (min-width: 981px) { .produto--fale .etiquetas { flex-wrap: nowrap; } .produto--fale .etiquetas li { white-space: nowrap; } }
+.produto .etiquetas { justify-content: center; }
   </style>
   <!-- css:fim -->
-  <script src="js/site.js?v=7" defer></script>
+  <script src="js/site.js?v=8" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -785,6 +793,28 @@ transition: transform .45s ease-out;
         <h2 class="revelar">Soluções prontas para usar</h2>
         <p class="secao__intro revelar">Sistemas da HbOne que o seu negócio começa a usar sem precisar desenvolver do zero.</p>
         <div class="produtos">
+          <article class="produto produto--fale revelar">
+            <div class="produto__topo">
+              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v5H4z M14 15h6v5h-6z M7 9v4a2 2 0 0 0 2 2h5 M14 6.5h6 M17 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="estado estado--disponivel">Disponível</span>
+            </div>
+            <h3>HbOne Qualidade</h3>
+            <p>Processos, riscos e auditorias num só lugar, com dono em cada etapa e aprovação registrada. Você escolhe o rigor, do modo Ágil ao ISO Completo, mede a maturidade da qualidade com o Diagnóstico de Maturidade e capacita a equipe com o Aprendizado, o curso dentro do sistema.</p>
+            <ul class="etiquetas"><li>Processos e Riscos</li><li>Maturidade</li><li>Modo ISO</li></ul>
+            <div class="produto__acoes">
+              <div class="fale fale--cartao">
+                <a class="botao botao--principal fale__botao" href="#contato" aria-controls="fale-produto">
+                  Fale com a HbOne
+                  <svg class="fale__seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <div class="fale__balao" id="fale-produto" hidden>
+                  <a class="fale__opcao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20HbOne%20Qualidade." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>WhatsApp<em>(92) 99200-5797</em></a>
+                  <a class="fale__opcao" href="mailto:contato@hbone.com.br?subject=HbOne%20Qualidade" data-copiar="contato@hbone.com.br"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>E-mail<em>contato@hbone.com.br</em></a>
+                </div>
+              </div>
+              <a class="produto__acao produto__acao--demo" href="https://demo-qualidade.hbone.com.br" target="_blank" rel="noopener">Testar a demonstração <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </article>
           <article class="produto revelar">
             <div class="produto__topo">
               <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -794,19 +824,6 @@ transition: transform .45s ease-out;
             <p>Cardápio digital para lanchonetes, açaiterias, cafeterias, pizzarias e restaurantes: o pedido cai direto no painel da loja, sem comissão por venda.</p>
             <ul class="etiquetas"><li>Cardápio online</li><li>Pix</li><li>Painel de pedidos</li></ul>
             <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20Menu%20Manaus." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <article class="produto revelar">
-            <div class="produto__topo">
-              <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v5H4z M14 15h6v5h-6z M7 9v4a2 2 0 0 0 2 2h5 M14 6.5h6 M17 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="estado estado--disponivel">Disponível</span>
-            </div>
-            <h3>HbOne Qualidade</h3>
-            <p>Processos, riscos e maturidade em um só lugar. Organograma, fluxogramas, responsáveis e indicadores reunidos num sistema só: cada pessoa sabe o seu papel, cada etapa tem dono e o jeito de trabalhar não se perde quando alguém sai da equipe.</p>
-            <ul class="etiquetas"><li>Processos</li><li>Riscos</li><li>Fluxogramas</li><li>Responsáveis</li></ul>
-            <div class="produto__acoes">
-              <a class="produto__acao produto__acao--demo" href="https://demo-qualidade.hbone.com.br" target="_blank" rel="noopener">Testar a demonstração <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-              <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20HbOne%20Qualidade." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
           </article>
           <article class="produto revelar">
             <div class="produto__topo">

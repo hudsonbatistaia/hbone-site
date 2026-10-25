@@ -41,10 +41,9 @@ if ('IntersectionObserver' in window && linksMenu.length) {
   }
 }
 
-// "Fale com a HbOne": abre o balão com WhatsApp e E-mail.
+// "Fale com a HbOne": abre o balão com WhatsApp e E-mail (há um na abertura e outro no cartão do HbOne Qualidade).
 // Sem JavaScript, o botão continua levando à seção de contato.
-const fale = document.querySelector('.fale');
-if (fale) {
+document.querySelectorAll('.fale').forEach((fale) => {
   const botaoFale = fale.querySelector('.fale__botao');
   const balao = fale.querySelector('.fale__balao');
   botaoFale.setAttribute('role', 'button');
@@ -72,7 +71,7 @@ if (fale) {
   document.addEventListener('click', (e) => { if (!fale.contains(e.target) && fale.classList.contains('aberto')) fechar(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && fale.classList.contains('aberto')) fechar(true); });
   balao.addEventListener('click', (e) => { if (e.target.closest('a')) setTimeout(() => fechar(), 150); });
-}
+});
 
 // Botões de e-mail: além de abrir o programa de e-mail, copiam o endereço
 // (muita gente não tem programa de e-mail configurado no computador)
