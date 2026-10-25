@@ -478,6 +478,10 @@ main:focus { outline: none; }
 .produto__acao svg { width: 18px; height: 18px; transition: transform .2s; }
 .produto__acao:hover { color: #fff; }
 .produto__acao:hover svg { transform: translateX(4px); }
+.produto__acoes { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: auto; }
+.produto__acoes .produto__acao { margin-top: 0; }
+.produto__acao--demo { color: #fff; }
+.produto__acao--demo:hover { color: var(--ciano); }
 
 /* ---------- Contato ---------- */
 .contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }

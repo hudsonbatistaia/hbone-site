@@ -467,6 +467,10 @@ font-weight: 700; color: var(--ciano); text-decoration: none;
 .produto__acao svg { width: 18px; height: 18px; transition: transform .2s; }
 .produto__acao:hover { color: #fff; }
 .produto__acao:hover svg { transform: translateX(4px); }
+.produto__acoes { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: auto; }
+.produto__acoes .produto__acao { margin-top: 0; }
+.produto__acao--demo { color: #fff; }
+.produto__acao--demo:hover { color: var(--ciano); }
 .contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
 .contato__brilho {
 position: absolute; inset: 0; z-index: -1;
@@ -794,12 +798,15 @@ transition: transform .45s ease-out;
           <article class="produto revelar">
             <div class="produto__topo">
               <span class="produto__icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v5H4z M14 15h6v5h-6z M7 9v4a2 2 0 0 0 2 2h5 M14 6.5h6 M17 4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="estado estado--teste">Em teste</span>
+              <span class="estado estado--disponivel">Disponível</span>
             </div>
-            <h3>Gestão de Processos</h3>
-            <p>Organograma, macroprocessos, processos, fluxogramas e responsáveis da empresa reunidos num só lugar. Cada pessoa sabe o seu papel, cada etapa tem dono e o jeito de trabalhar não se perde quando alguém sai da equipe.</p>
-            <ul class="etiquetas"><li>Organograma</li><li>Macroprocessos</li><li>Fluxogramas</li><li>Responsáveis</li></ul>
-            <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Gest%C3%A3o%20de%20Processos." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <h3>HbOne Qualidade</h3>
+            <p>Processos, riscos e maturidade em um só lugar. Organograma, fluxogramas, responsáveis e indicadores reunidos num sistema só: cada pessoa sabe o seu papel, cada etapa tem dono e o jeito de trabalhar não se perde quando alguém sai da equipe.</p>
+            <ul class="etiquetas"><li>Processos</li><li>Riscos</li><li>Fluxogramas</li><li>Responsáveis</li></ul>
+            <div class="produto__acoes">
+              <a class="produto__acao produto__acao--demo" href="https://demo-qualidade.hbone.com.br" target="_blank" rel="noopener">Testar a demonstração <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="produto__acao" href="https://wa.me/5592992005797?text=Ol%C3%A1!%20Quero%20conhecer%20o%20HbOne%20Qualidade." target="_blank" rel="noopener">Quero conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
           </article>
           <article class="produto revelar">
             <div class="produto__topo">
