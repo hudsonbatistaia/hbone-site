@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var t=localStorage.getItem('hbTema');if(t!=='claro'&&t!=='escuro')t=matchMedia('(prefers-color-scheme: dark)').matches?'escuro':'claro';document.documentElement.dataset.tema=t}catch(e){}</script>
   <title>HbOne Soluções | Sistemas sob medida</title>
-  <meta name="description" content="A HbOne Soluções desenvolve sistemas web, painéis e ferramentas internas sob medida, com custo acessível e entrega caprichada, além de produtos próprios prontos para usar.">
+  <meta name="description" content="A HbOne Soluções desenvolve sistemas, sites e painéis sob medida, com custo acessível e entrega caprichada, além de soluções prontas para usar.">
   <meta name="theme-color" content="#07131f">
   <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://hbone.com.br/">
@@ -17,7 +18,7 @@
   <meta property="og:site_name" content="HbOne Soluções">
   <meta property="og:url" content="https://hbone.com.br/">
   <meta property="og:title" content="HbOne Soluções | Sistemas sob medida">
-  <meta property="og:description" content="Sistemas web, painéis e ferramentas internas feitos para o jeito que o seu negócio funciona.">
+  <meta property="og:description" content="Sistemas, sites e painéis feitos para o jeito que o seu negócio funciona.">
   <meta property="og:image" content="https://hbone.com.br/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +34,7 @@
     "url": "https://hbone.com.br/",
     "logo": "https://hbone.com.br/apple-touch-icon.png",
     "email": "contato@hbone.com.br",
-    "description": "A HbOne cria sistemas sob medida e produtos digitais que simplificam a rotina de pequenos e médios negócios.",
+    "description": "A HbOne cria sistemas, sites e painéis sob medida, além de soluções prontas, que simplificam a rotina de pequenos e médios negócios.",
     "telephone": "+55-92-99200-5797",
     "sameAs": ["https://www.instagram.com/hbonesolucoes/"],
     "address": { "@type": "PostalAddress", "addressLocality": "Manaus", "addressRegion": "AM", "addressCountry": "BR" }
@@ -62,7 +63,7 @@
 --fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
-:root {
+:root:not([data-tema]) {
 --fundo: #0b1621;
 --fundo-alt: #0f1c29;
 --cartao: #111f2d;
@@ -74,6 +75,19 @@
 --sombra: 0 12px 32px -12px rgb(0 0 0 / .6);
 }
 }
+:root[data-tema="escuro"] {
+--fundo: #0b1621;
+--fundo-alt: #0f1c29;
+--cartao: #111f2d;
+--texto: #e6edf3;
+--texto-suave: #a0afbe;
+--borda: #1f3142;
+--marca: #eef4f9;
+--destaque: #3cc8d1;
+--sombra: 0 12px 32px -12px rgb(0 0 0 / .6);
+}
+html[data-tema="claro"] { color-scheme: light; }
+html[data-tema="escuro"] { color-scheme: dark; }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { color-scheme: light dark; scroll-behavior: smooth; scroll-padding-top: 72px; }
@@ -107,6 +121,14 @@ background: var(--degrade);
 -webkit-background-clip: text; background-clip: text;
 color: transparent;
 }
+.tema { display: none; place-items: center; width: 36px; height: 36px; padding: 0; border-radius: 50%; cursor: pointer;
+color: #b8c7d4; background: transparent; border: 1px solid rgb(255 255 255 / .16); transition: color .2s, border-color .2s, background-color .2s; }
+:root[data-tema] .tema { display: inline-grid; }
+.tema:hover { color: #fff; border-color: rgb(47 211 220 / .6); background: rgb(255 255 255 / .06); }
+.tema svg { width: 17px; height: 17px; }
+.tema__sol { display: none; }
+:root[data-tema="escuro"] .tema__sol { display: block; }
+:root[data-tema="escuro"] .tema__lua { display: none; }
 .marca { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1; text-decoration: none; }
 .marca__nome { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; transition: text-shadow .3s; }
 .marca__nome span {
@@ -172,7 +194,7 @@ background: var(--degrade); opacity: 0; transition: opacity .25s;
 .abertura {
 position: relative; isolation: isolate; overflow: hidden;
 background: var(--noite); color: #c9d6e2;
-padding: 150px 0 110px;
+padding: 136px 0 84px;
 }
 .abertura__brilho {
 position: absolute; inset: -20% -10% auto; height: 120%; z-index: -1;
@@ -281,14 +303,14 @@ background: rgb(69 212 131 / .18); color: #45d483; font-weight: 800;
 .flutuante__icone svg { width: 18px; height: 18px; }
 .flutuante--a { left: -28px; bottom: 34px; animation: boiar 6s ease-in-out infinite; }
 .flutuante--b { right: -18px; top: -22px; animation: boiar 7s ease-in-out -2s infinite; }
-.secao { padding: 104px 0; }
+.secao { padding: 76px 0; }
 .secao--alternada { background: var(--fundo-alt); }
 .rotulo {
 font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
 background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent;
 display: inline-block; margin-bottom: 10px;
 }
-.secao h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 44px; }
+.secao h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 36px; }
 .secao h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
 .secao p { color: var(--texto-suave); }
 .cartoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -424,7 +446,7 @@ radial-gradient(35% 50% at 5% 95%, rgb(47 211 220 / .16), transparent 70%);
 }
 .secao--noite h2 { color: #fff; }
 .secao h2:has(+ .secao__intro) { margin-bottom: 14px; }
-.secao .secao__intro { max-width: 60ch; margin-bottom: 44px; color: var(--texto-suave); }
+.secao .secao__intro { max-width: 60ch; margin-bottom: 36px; color: var(--texto-suave); }
 .secao--noite .secao__intro { color: #a9bbcb; }
 .produtos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .produto {
@@ -477,7 +499,7 @@ font-weight: 700; color: var(--ciano); text-decoration: none;
 .fale--cartao.aberto .fale__balao { transform: none; }
 .produto__acao--demo { color: #fff; }
 .produto__acao--demo:hover { color: var(--ciano); }
-.contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
+.contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 84px 0; text-align: center; }
 .contato__brilho {
 position: absolute; inset: 0; z-index: -1;
 background:
@@ -526,13 +548,13 @@ transition: opacity .25s, transform .25s;
 .aviso--visivel { opacity: 1; transform: translate(-50%, 0); }
 .pausado, .pausado *, .pausado::before, .pausado::after, .pausado *::before, .pausado *::after { animation-play-state: paused !important; }
 .rodape { background: #050e17; color: #93a6b7; font-size: 0.95rem; border-top: 1px solid rgb(255 255 255 / .06); }
-.rodape__grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-top: 64px; padding-bottom: 48px; }
-.rodape__marca p { margin-top: 18px; max-width: 38ch; line-height: 1.65; }
+.rodape__grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-top: 44px; padding-bottom: 30px; }
+.rodape__marca p { margin-top: 12px; max-width: 38ch; line-height: 1.65; }
 .rodape__titulo {
-margin: 4px 0 18px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+margin: 4px 0 12px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
 background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .rodape__coluna a { color: #b8c7d4; text-decoration: none; transition: color .2s; overflow-wrap: anywhere; }
 .rodape__coluna a:hover { color: #fff; }
 .redes { display: flex; gap: 12px; margin-top: 24px; }
@@ -545,7 +567,7 @@ transition: transform .25s, background .25s, box-shadow .25s, color .25s;
 .redes a:hover { transform: translateY(-3px); color: #fff; background: var(--degrade); border-color: transparent; box-shadow: 0 10px 24px -8px rgb(79 124 255 / .8); }
 .rodape__base {
 display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-padding-top: 22px; padding-bottom: 26px; font-size: 0.85rem; color: #6f8496;
+padding-top: 16px; padding-bottom: 18px; font-size: 0.85rem; color: #6f8496;
 border-top: 1px solid rgb(255 255 255 / .06);
 }
 .js .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
@@ -612,8 +634,8 @@ html { scroll-behavior: auto; }
 @media (max-width: 640px) {
 .largura { padding: 0 16px; }
 .topo nav a:not(.topo__contato) { display: none; }
-.abertura { padding: 116px 0 80px; }
-.secao, .contato { padding: 72px 0; }
+.abertura { padding: 112px 0 60px; }
+.secao, .contato { padding: 56px 0; }
 .cartoes, .passos, .produtos { grid-template-columns: 1fr; }
 .produto { padding: 24px; }
 .passos::after { display: none; }
@@ -644,9 +666,46 @@ transition: transform .45s ease-out;
 }
 @media (min-width: 981px) { .produto--fale .etiquetas { flex-wrap: nowrap; } .produto--fale .etiquetas li { white-space: nowrap; } }
 .produto .etiquetas { justify-content: center; }
+:root[data-tema="claro"] .topo { background: rgb(7 19 31 / .96); border-bottom-color: rgb(255 255 255 / .08); }
+:root[data-tema="claro"] .abertura { background: linear-gradient(180deg, #eef4fa 0%, #ffffff 100%); color: var(--texto-suave); }
+:root[data-tema="claro"] .abertura__brilho { opacity: .4; }
+:root[data-tema="claro"] .abertura__grade {
+background-image: linear-gradient(rgb(11 31 51 / .05) 1px, transparent 1px), linear-gradient(90deg, rgb(11 31 51 / .05) 1px, transparent 1px);
+}
+:root[data-tema="claro"] .abertura h1 { color: var(--marca); }
+:root[data-tema="claro"] .abertura .degrade { background-image: linear-gradient(100deg, #0e8a94 0%, #3a5ed8 55%, #7445d8 100%); }
+:root[data-tema="claro"] .abertura__desc { color: var(--texto-suave); }
+:root[data-tema="claro"] .selo { background: rgb(11 31 51 / .05); border-color: rgb(11 31 51 / .12); color: #334155; }
+:root[data-tema="claro"] .botao--vidro { color: var(--marca); background: #fff; border-color: rgb(11 31 51 / .18); }
+:root[data-tema="claro"] .botao--vidro:hover { background: #f2f6f9; }
+:root[data-tema="claro"] .tela { background: linear-gradient(160deg, #18304a, #0d1b2a); border-color: rgb(11 31 51 / .25); box-shadow: 0 40px 70px -30px rgb(11 31 51 / .55); }
+:root[data-tema="claro"] .secao--noite { background: var(--fundo); }
+:root[data-tema="claro"] .secao--noite::before { opacity: .3; }
+:root[data-tema="claro"] .secao--noite h2 { color: var(--marca); }
+:root[data-tema="claro"] .secao--noite .secao__intro { color: var(--texto-suave); }
+:root[data-tema="claro"] .produto { background: var(--cartao); border-color: var(--borda); box-shadow: var(--sombra); }
+:root[data-tema="claro"] .produto:hover { border-color: rgb(14 138 148 / .5); box-shadow: 0 24px 48px -20px rgb(79 124 255 / .35); }
+:root[data-tema="claro"] .produto h3 { color: var(--marca); }
+:root[data-tema="claro"] .produto p { color: var(--texto-suave); }
+:root[data-tema="claro"] .produto .etiquetas li { color: var(--texto-suave); background: var(--fundo-alt); border-color: var(--borda); }
+:root[data-tema="claro"] .produto:hover .etiquetas li { color: var(--destaque); border-color: color-mix(in srgb, var(--destaque) 45%, transparent); }
+:root[data-tema="claro"] .estado { color: #334155; background: rgb(11 31 51 / .05); border-color: rgb(11 31 51 / .1); }
+:root[data-tema="claro"] .produto__acao { color: var(--destaque); }
+:root[data-tema="claro"] .produto__acao:hover { color: var(--marca); }
+:root[data-tema="claro"] .produto__acao--demo { color: var(--marca); }
+:root[data-tema="claro"] .produto__acao--demo:hover { color: var(--destaque); }
+:root[data-tema="claro"] #diferenciais { background: var(--fundo-alt); }
+:root[data-tema="claro"] .contato { background: linear-gradient(180deg, #ffffff 0%, #eaf2fa 100%); }
+:root[data-tema="claro"] .contato__brilho { opacity: .35; }
+:root[data-tema="claro"] .contato h2 { color: var(--marca); }
+:root[data-tema="claro"] .contato p { color: var(--texto-suave); }
+:root[data-tema="claro"] .contato__email { color: var(--marca); }
+:root[data-tema="claro"] .contato__email:hover { color: var(--destaque); border-color: var(--destaque); }
+:root[data-tema="claro"] .abertura { padding-bottom: 44px; }
+:root[data-tema="claro"] #servicos { padding-top: 56px; }
   </style>
   <!-- css:fim -->
-  <script src="js/site.js?v=8" defer></script>
+  <script src="js/site.js?v=10" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -661,6 +720,10 @@ transition: transform .45s ease-out;
         <a href="#como">Como trabalhamos</a>
         <a href="#produtos">Produtos</a>
         <a class="topo__contato" href="#contato">Contato</a>
+        <button class="tema" type="button" aria-label="Mudar para o tema claro" title="Mudar tema">
+          <svg class="tema__lua" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="tema__sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -675,9 +738,9 @@ transition: transform .45s ease-out;
           <p class="selo"><span class="selo__ponto"></span>Sistemas sob medida</p>
           <h1>Tecnologia feita para <span class="degrade">o&nbsp;jeito que o&nbsp;seu negócio funciona.</span></h1>
           <p class="abertura__desc">
-            Sistemas web, painéis e ferramentas internas sob medida, com custo acessível
-            e entrega caprichada, além de produtos próprios prontos para usar. Tudo leve,
-            funcionando no celular e com acompanhamento de perto.
+            Sistemas, sites e painéis sob medida para o seu negócio, com custo acessível
+            e entrega caprichada. Também oferecemos soluções prontas para usar. Tudo leve,
+            no celular e com acompanhamento de perto.
           </p>
           <div class="botoes">
             <div class="fale">
@@ -734,8 +797,8 @@ transition: transform .45s ease-out;
     <section id="servicos" class="secao">
       <div class="largura">
         <p class="rotulo revelar">Sob medida</p>
-        <h2 class="revelar">Sistemas feitos para o seu negócio</h2>
-        <p class="secao__intro revelar">Desenhados a partir do processo da sua equipe, e não o contrário. Planilhas espalhadas e controles manuais viram um sistema simples, organizado e acessível de qualquer lugar.</p>
+        <h2 class="revelar">Sistemas e sites feitos para o seu negócio</h2>
+        <p class="secao__intro revelar">Desenhados a partir do processo da sua equipe, e não o contrário. Planilhas espalhadas e controles manuais viram um sistema ou site simples, organizado e acessível de qualquer lugar.</p>
         <div class="cartoes">
           <article class="cartao revelar">
             <span class="cartao__icone">
@@ -748,8 +811,8 @@ transition: transform .45s ease-out;
             <span class="cartao__icone">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z M3 9h18 M6.5 7h.01 M9 7h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <h3>Sistemas web</h3>
-            <p>Cadastros, pedidos, agendamentos e aprovações funcionando no navegador e no celular, sem instalar nada.</p>
+            <h3>Sistemas e sites</h3>
+            <p>Cadastros, pedidos, agendamentos e aprovações, ou o site da sua empresa, funcionando no navegador e no celular, sem instalar nada.</p>
           </article>
           <article class="cartao revelar">
             <span class="cartao__icone">
@@ -923,7 +986,7 @@ transition: transform .45s ease-out;
           <span class="marca__nome">Hb<span>One</span></span>
           <span class="marca__sub">Soluções</span>
         </a>
-        <p>A HbOne cria sistemas sob medida e produtos digitais que simplificam a rotina de pequenos e médios negócios.</p>
+        <p>A HbOne cria sistemas, sites e painéis sob medida, além de soluções prontas, que simplificam a rotina de pequenos e médios negócios.</p>
         <div class="redes">
           <a href="https://www.instagram.com/hbonesolucoes/" target="_blank" rel="noopener" aria-label="Instagram da HbOne (abre em nova aba)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg>

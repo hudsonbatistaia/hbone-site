@@ -129,3 +129,31 @@ if ('IntersectionObserver' in window) {
 } else {
   itens.forEach((item) => item.classList.add('visivel'));
 }
+
+// Botão de tema (claro/escuro): a escolha fica guardada neste navegador.
+// Na primeira visita vale o tema do aparelho (definido no script do <head>).
+const botaoTema = document.querySelector('.tema');
+if (botaoTema) {
+  const raiz = document.documentElement;
+  const rotular = () => {
+    const escuro = raiz.dataset.tema === 'escuro';
+    botaoTema.setAttribute('aria-label', escuro ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+    botaoTema.setAttribute('title', escuro ? 'Tema claro' : 'Tema escuro');
+  };
+  rotular();
+  // sem escolha guardada, o site acompanha o tema do aparelho, inclusive se ele mudar com a página aberta
+  const aparelho = matchMedia('(prefers-color-scheme: dark)');
+  aparelho.addEventListener('change', (e) => {
+    let guardado = null;
+    try { guardado = localStorage.getItem('hbTema'); } catch (err) {}
+    if (guardado === 'claro' || guardado === 'escuro') return;
+    raiz.dataset.tema = e.matches ? 'escuro' : 'claro';
+    rotular();
+  });
+  botaoTema.addEventListener('click', () => {
+    const novo = raiz.dataset.tema === 'escuro' ? 'claro' : 'escuro';
+    raiz.dataset.tema = novo;
+    try { localStorage.setItem('hbTema', novo); } catch (e) {}
+    rotular();
+  });
+}

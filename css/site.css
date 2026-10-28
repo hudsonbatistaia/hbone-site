@@ -20,8 +20,9 @@
   --fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Tema escuro: sem JavaScript segue o aparelho; com JavaScript vale o data-tema (escolha do botão ou, na 1ª visita, o aparelho) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-tema]) {
     --fundo: #0b1621;
     --fundo-alt: #0f1c29;
     --cartao: #111f2d;
@@ -33,7 +34,20 @@
     --sombra: 0 12px 32px -12px rgb(0 0 0 / .6);
   }
 }
+:root[data-tema="escuro"] {
+  --fundo: #0b1621;
+  --fundo-alt: #0f1c29;
+  --cartao: #111f2d;
+  --texto: #e6edf3;
+  --texto-suave: #a0afbe;
+  --borda: #1f3142;
+  --marca: #eef4f9;
+  --destaque: #3cc8d1;
+  --sombra: 0 12px 32px -12px rgb(0 0 0 / .6);
+}
 
+html[data-tema="claro"] { color-scheme: light; }
+html[data-tema="escuro"] { color-scheme: dark; }
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { color-scheme: light dark; scroll-behavior: smooth; scroll-padding-top: 72px; }
@@ -71,6 +85,16 @@ main:focus { outline: none; }
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
 }
+
+/* ---------- Botão de tema (claro/escuro): discreto, no topo ---------- */
+.tema { display: none; place-items: center; width: 36px; height: 36px; padding: 0; border-radius: 50%; cursor: pointer;
+  color: #b8c7d4; background: transparent; border: 1px solid rgb(255 255 255 / .16); transition: color .2s, border-color .2s, background-color .2s; }
+:root[data-tema] .tema { display: inline-grid; }
+.tema:hover { color: #fff; border-color: rgb(47 211 220 / .6); background: rgb(255 255 255 / .06); }
+.tema svg { width: 17px; height: 17px; }
+.tema__sol { display: none; }
+:root[data-tema="escuro"] .tema__sol { display: block; }
+:root[data-tema="escuro"] .tema__lua { display: none; }
 
 /* ---------- Marca: HbOne + SOLUÇÕES ---------- */
 .marca { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1; text-decoration: none; }
@@ -148,7 +172,7 @@ main:focus { outline: none; }
 .abertura {
   position: relative; isolation: isolate; overflow: hidden;
   background: var(--noite); color: #c9d6e2;
-  padding: 150px 0 110px;
+  padding: 136px 0 84px;
 }
 .abertura__brilho {
   position: absolute; inset: -20% -10% auto; height: 120%; z-index: -1;
@@ -265,14 +289,14 @@ main:focus { outline: none; }
 .flutuante--b { right: -18px; top: -22px; animation: boiar 7s ease-in-out -2s infinite; }
 
 /* ---------- Seções ---------- */
-.secao { padding: 104px 0; }
+.secao { padding: 76px 0; }
 .secao--alternada { background: var(--fundo-alt); }
 .rotulo {
   font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
   background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent;
   display: inline-block; margin-bottom: 10px;
 }
-.secao h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 44px; }
+.secao h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 36px; }
 .secao h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
 .secao p { color: var(--texto-suave); }
 
@@ -430,7 +454,7 @@ main:focus { outline: none; }
 .secao--noite h2 { color: #fff; }
 /* frase de introdução logo abaixo do título da seção */
 .secao h2:has(+ .secao__intro) { margin-bottom: 14px; }
-.secao .secao__intro { max-width: 60ch; margin-bottom: 44px; color: var(--texto-suave); }
+.secao .secao__intro { max-width: 60ch; margin-bottom: 36px; color: var(--texto-suave); }
 .secao--noite .secao__intro { color: #a9bbcb; }
 
 .produtos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -491,7 +515,7 @@ main:focus { outline: none; }
 .produto__acao--demo:hover { color: var(--ciano); }
 
 /* ---------- Contato ---------- */
-.contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 110px 0; text-align: center; }
+.contato { position: relative; isolation: isolate; overflow: hidden; background: var(--noite); padding: 84px 0; text-align: center; }
 .contato__brilho {
   position: absolute; inset: 0; z-index: -1;
   background:
@@ -551,13 +575,13 @@ main:focus { outline: none; }
 /* ---------- Rodapé ---------- */
 /* Sempre escuro, continuando o contato */
 .rodape { background: #050e17; color: #93a6b7; font-size: 0.95rem; border-top: 1px solid rgb(255 255 255 / .06); }
-.rodape__grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-top: 64px; padding-bottom: 48px; }
-.rodape__marca p { margin-top: 18px; max-width: 38ch; line-height: 1.65; }
+.rodape__grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-top: 44px; padding-bottom: 30px; }
+.rodape__marca p { margin-top: 12px; max-width: 38ch; line-height: 1.65; }
 .rodape__titulo {
-  margin: 4px 0 18px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+  margin: 4px 0 12px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
   background: var(--degrade); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .rodape__coluna a { color: #b8c7d4; text-decoration: none; transition: color .2s; overflow-wrap: anywhere; }
 .rodape__coluna a:hover { color: #fff; }
 
@@ -572,7 +596,7 @@ main:focus { outline: none; }
 
 .rodape__base {
   display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  padding-top: 22px; padding-bottom: 26px; font-size: 0.85rem; color: #6f8496;
+  padding-top: 16px; padding-bottom: 18px; font-size: 0.85rem; color: #6f8496;
   border-top: 1px solid rgb(255 255 255 / .06);
 }
 
@@ -647,8 +671,8 @@ main:focus { outline: none; }
 @media (max-width: 640px) {
   .largura { padding: 0 16px; }
   .topo nav a:not(.topo__contato) { display: none; }
-  .abertura { padding: 116px 0 80px; }
-  .secao, .contato { padding: 72px 0; }
+  .abertura { padding: 112px 0 60px; }
+  .secao, .contato { padding: 56px 0; }
   .cartoes, .passos, .produtos { grid-template-columns: 1fr; }
   .produto { padding: 24px; }
   /* Passos em coluna: a linha desce ligando os números */
@@ -682,3 +706,52 @@ main:focus { outline: none; }
 /* etiquetas do cartão em destaque: no mesmo tamanho dos outros cartões, as 3 ficam na mesma linha (em tela estreita voltam a quebrar) */
 @media (min-width: 981px) { .produto--fale .etiquetas { flex-wrap: nowrap; } .produto--fale .etiquetas li { white-space: nowrap; } }
 .produto .etiquetas { justify-content: center; }
+
+/* ======================================================================
+   Tema CLARO (botão de tema): predomina o branco; ficam escuros só a barra de menus do topo, a ilustração do painel,
+   o balão do "Fale com a HbOne" e o rodapé. Vale só com data-tema="claro".
+   ====================================================================== */
+/* topo: só a barra de menus é escura; a abertura é clara */
+:root[data-tema="claro"] .topo { background: rgb(7 19 31 / .96); border-bottom-color: rgb(255 255 255 / .08); }
+/* abertura */
+:root[data-tema="claro"] .abertura { background: linear-gradient(180deg, #eef4fa 0%, #ffffff 100%); color: var(--texto-suave); }
+:root[data-tema="claro"] .abertura__brilho { opacity: .4; }
+:root[data-tema="claro"] .abertura__grade {
+  background-image: linear-gradient(rgb(11 31 51 / .05) 1px, transparent 1px), linear-gradient(90deg, rgb(11 31 51 / .05) 1px, transparent 1px);
+}
+:root[data-tema="claro"] .abertura h1 { color: var(--marca); }
+:root[data-tema="claro"] .abertura .degrade { background-image: linear-gradient(100deg, #0e8a94 0%, #3a5ed8 55%, #7445d8 100%); }
+:root[data-tema="claro"] .abertura__desc { color: var(--texto-suave); }
+:root[data-tema="claro"] .selo { background: rgb(11 31 51 / .05); border-color: rgb(11 31 51 / .12); color: #334155; }
+:root[data-tema="claro"] .botao--vidro { color: var(--marca); background: #fff; border-color: rgb(11 31 51 / .18); }
+:root[data-tema="claro"] .botao--vidro:hover { background: #f2f6f9; }
+/* a ilustração do painel continua escura (o detalhe escuro do topo) */
+:root[data-tema="claro"] .tela { background: linear-gradient(160deg, #18304a, #0d1b2a); border-color: rgb(11 31 51 / .25); box-shadow: 0 40px 70px -30px rgb(11 31 51 / .55); }
+/* Produtos */
+:root[data-tema="claro"] .secao--noite { background: var(--fundo); }
+:root[data-tema="claro"] .secao--noite::before { opacity: .3; }
+:root[data-tema="claro"] .secao--noite h2 { color: var(--marca); }
+:root[data-tema="claro"] .secao--noite .secao__intro { color: var(--texto-suave); }
+:root[data-tema="claro"] .produto { background: var(--cartao); border-color: var(--borda); box-shadow: var(--sombra); }
+:root[data-tema="claro"] .produto:hover { border-color: rgb(14 138 148 / .5); box-shadow: 0 24px 48px -20px rgb(79 124 255 / .35); }
+:root[data-tema="claro"] .produto h3 { color: var(--marca); }
+:root[data-tema="claro"] .produto p { color: var(--texto-suave); }
+:root[data-tema="claro"] .produto .etiquetas li { color: var(--texto-suave); background: var(--fundo-alt); border-color: var(--borda); }
+:root[data-tema="claro"] .produto:hover .etiquetas li { color: var(--destaque); border-color: color-mix(in srgb, var(--destaque) 45%, transparent); }
+:root[data-tema="claro"] .estado { color: #334155; background: rgb(11 31 51 / .05); border-color: rgb(11 31 51 / .1); }
+:root[data-tema="claro"] .produto__acao { color: var(--destaque); }
+:root[data-tema="claro"] .produto__acao:hover { color: var(--marca); }
+:root[data-tema="claro"] .produto__acao--demo { color: var(--marca); }
+:root[data-tema="claro"] .produto__acao--demo:hover { color: var(--destaque); }
+/* Diferenciais em cinza claro, para alternar com Produtos */
+:root[data-tema="claro"] #diferenciais { background: var(--fundo-alt); }
+/* Contato */
+:root[data-tema="claro"] .contato { background: linear-gradient(180deg, #ffffff 0%, #eaf2fa 100%); }
+:root[data-tema="claro"] .contato__brilho { opacity: .35; }
+:root[data-tema="claro"] .contato h2 { color: var(--marca); }
+:root[data-tema="claro"] .contato p { color: var(--texto-suave); }
+:root[data-tema="claro"] .contato__email { color: var(--marca); }
+:root[data-tema="claro"] .contato__email:hover { color: var(--destaque); border-color: var(--destaque); }
+/* abertura e "Sistemas" são as duas brancas seguidas: no claro o vazio entre elas somava os dois espaçamentos */
+:root[data-tema="claro"] .abertura { padding-bottom: 44px; }
+:root[data-tema="claro"] #servicos { padding-top: 56px; }
