@@ -584,6 +584,8 @@ main:focus { outline: none; }
 .rodape__coluna ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .rodape__coluna a { color: #b8c7d4; text-decoration: none; transition: color .2s; overflow-wrap: anywhere; }
 .rodape__coluna a:hover { color: #fff; }
+.rodape__interna { margin-left: 14px; color: #b8c7d4; text-decoration: none; transition: color .2s; }
+.rodape__interna:hover { color: #fff; }
 
 .redes { display: flex; gap: 12px; margin-top: 24px; }
 .redes a {
