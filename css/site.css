@@ -170,7 +170,9 @@ main:focus { outline: none; }
 
 /* ---------- Abertura ---------- */
 .abertura {
-  position: relative; isolation: isolate; overflow: hidden;
+  position: relative; isolation: isolate;
+  /* corta os brilhos nos lados e em cima, mas deixa o balão "Fale com a HbOne" passar da base */
+  clip-path: inset(0 0 -260px 0);
   background: var(--noite); color: #c9d6e2;
   padding: 136px 0 84px;
 }
@@ -754,6 +756,10 @@ main:focus { outline: none; }
 :root[data-tema="claro"] .contato p { color: var(--texto-suave); }
 :root[data-tema="claro"] .contato__email { color: var(--marca); }
 :root[data-tema="claro"] .contato__email:hover { color: var(--destaque); border-color: var(--destaque); }
-/* abertura e "Sistemas" são as duas brancas seguidas: no claro o vazio entre elas somava os dois espaçamentos */
-:root[data-tema="claro"] .abertura { padding-bottom: 44px; }
-:root[data-tema="claro"] #servicos { padding-top: 56px; }
+/* abertura e "Sistemas" são as duas brancas seguidas: no claro o vazio entre elas somava os dois espaçamentos; 60 px + os 76 px da seção seguinte deixam o balão do "Fale com a HbOne" aberto sem encostar no título */
+:root[data-tema="claro"] .abertura { padding-bottom: 60px; }
+/* no tema claro o vidro do balão ficava acinzentado sobre o branco: fundo azul-noite quase sólido */
+:root[data-tema="claro"] .fale__balao { background: rgb(13 26 40 / .97); box-shadow: 0 18px 40px -16px rgb(11 31 51 / .55); }
+:root[data-tema="claro"] .fale__opcao em { color: #8ea4b6; }
+/* o brilho lilás do fundo terminava num corte reto na base da abertura: some aos poucos */
+:root[data-tema="claro"] .abertura__brilho { -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 96%); mask-image: linear-gradient(to bottom, #000 55%, transparent 96%); }
