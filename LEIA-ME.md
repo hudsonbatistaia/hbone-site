@@ -26,6 +26,11 @@ assinatura/           assinatura de e-mail (https://hbone.com.br/assinatura/): p
 - **Depois de mudar o CSS:** edite só o `css/site.css` e rode `node montar.mjs`, que copia o CSS para dentro do `index.html` (assim a página abre mais rápido no celular). Aumente também o `?v=` do CSS no `404.html`.
 - **Depois de mudar o JS:** aumente o número em `site.js?v=…` no `index.html`. **É obrigatório:** o navegador guarda o arquivo por 1 ano e só busca o novo quando o número muda.
 
+## Mensagens prontas do WhatsApp (uma por origem, para saber de onde o contato veio)
+- Botão geral (abertura, contato, rodapé): "Olá! Vim pelo site da HbOne e gostaria de conversar sobre um projeto para o meu negócio."
+- Cartões: "Olá! Vi o HbOne Qualidade (ou OKR, Escolas, Menu Manaus) no site e …". Dentro das demonstrações, cada uma já manda a sua ("Estive testando a demonstração do HbOne …").
+- Para mudar: procure `wa.me/5592995062808?text=` no `index.html` (o texto vai codificado dentro do endereço do link).
+
 ## Publicar no servidor HB (Oracle)
 1. Envie esta pasta para o repositório `hbone-site` no GitHub (conta hudsonbatistaia).
 2. No servidor, na primeira vez:
