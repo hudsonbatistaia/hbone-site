@@ -483,6 +483,10 @@ main:focus { outline: none; }
 .produto:hover .produto__icone { transform: translateY(-4px) rotate(-6deg); }
 .produto h3 { color: #fff; }
 .produto p { color: #a9bbcb; }
+/* o texto ocupa a sobra do cartão: etiquetas e botões ficam na mesma altura nos cartões da mesma linha */
+.produto > p { flex: 1 0 auto; }
+/* link sozinho (sem o botão do balão): mesma altura da linha de botões, para as etiquetas alinharem com as do cartão ao lado */
+.produto > .produto__acao { min-height: 64px; align-items: center; }
 .produto .etiquetas li { color: #b8c7d4; background: rgb(255 255 255 / .05); border-color: rgb(255 255 255 / .12); }
 .produto:hover .etiquetas li { color: #d9fbfd; border-color: rgb(47 211 220 / .45); }
 
