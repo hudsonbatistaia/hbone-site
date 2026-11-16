@@ -626,6 +626,22 @@ border-top: 1px solid rgb(255 255 255 / .06);
 html { scroll-behavior: auto; }
 .js .revelar { opacity: 1; transform: none; }
 }
+.faixa { background: #0b1b30; border-block: 1px solid rgb(255 255 255 / .06); overflow: hidden; }
+.faixa__trilho { display: flex; width: max-content; animation: faixa-rola 60s linear infinite; }
+.faixa:hover .faixa__trilho { animation-play-state: paused; }
+.faixa__grupo { display: flex; flex-shrink: 0; margin: 0; padding: 0; list-style: none; }
+.faixa__grupo li {
+display: flex; align-items: center; gap: 28px; padding: 20px 0 20px 28px;
+font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+color: rgb(226 234 245 / .78);
+}
+.faixa__grupo li::after { content: ""; width: 7px; height: 7px; background: var(--ciano); transform: rotate(45deg); flex-shrink: 0; }
+@keyframes faixa-rola { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+.faixa__trilho { width: auto; flex-wrap: wrap; justify-content: center; }
+.faixa__grupo[aria-hidden="true"] { display: none; }
+.faixa__grupo { flex-wrap: wrap; justify-content: center; }
+}
 @media (max-width: 960px) {
 .abertura__linha { grid-template-columns: 1fr; gap: 64px; }
 .rodape__grade { grid-template-columns: 1fr 1fr; }
@@ -800,6 +816,10 @@ background-image: linear-gradient(rgb(11 31 51 / .05) 1px, transparent 1px), lin
         </div>
       </div>
     </section>
+
+    <div class="faixa" aria-label="O que a HbOne entrega">
+      <div class="faixa__trilho"><ul class="faixa__grupo"><li>Sistemas sob medida</li><li>Sites</li><li>Painéis de acompanhamento</li><li>Processos e Riscos</li><li>OKR</li><li>Escolas</li><li>Advocacia</li><li>Contabilidade</li><li>Funciona no celular</li><li>Suporte de perto</li></ul><ul class="faixa__grupo" aria-hidden="true"><li>Sistemas sob medida</li><li>Sites</li><li>Painéis de acompanhamento</li><li>Processos e Riscos</li><li>OKR</li><li>Escolas</li><li>Advocacia</li><li>Contabilidade</li><li>Funciona no celular</li><li>Suporte de perto</li></ul></div>
+    </div>
 
     <section id="servicos" class="secao">
       <div class="largura">
